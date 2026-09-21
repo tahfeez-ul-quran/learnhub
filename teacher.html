@@ -1,1663 +1,1012 @@
-[6:02 am, 21/09/2026] saqib: 2
-[6:03 am, 21/09/2026] saqib: <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Teacher Dashboard - Learn Hub Quran</title>
-
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: Arial, Helvetica, sans-serif;
-            background: #f6faf7;
-            color: #1f2937;
-        }
-
-        a {
-            text-decoration: none;
-            color: inherit;
-        }
-
-        button,
-        input,
-        select,
-        textarea {
-            font-family: inherit;
-        }
-
-        header {
-            background: white;
-            box-shadow: 0 2px 12px rgba(0,0,0,0.08);
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-        }
-
-        .navbar {
-            max-width: 1200px;
-            min-height: 70px;
-            margin: auto;
-            padding: 0 20px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 20px;
-        }
-
-        .logo {
-            font-size: 24px;
-            font-weight: bold;
-            color: #087443;
-        }
-
-        .logo span {
-            color: #c99c24;
-        }
-
-        .nav-links {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            flex-wrap: wrap;
-        }
-
-        .nav-links a {
-            padding: 9px 12px;
-            border-radius: 7px;
-            font-size: 14px;
-        }
-
-        .nav-links a:hover {
-            background: #087443;
-            color: white;
-        }
-
-        .language-select {
-            padding: 8px;
-            border: 1px solid #d5ddd8;
-            border-radius: 7px;
-            background: white;
-        }
-
-        .hero {
-            background: linear-gradient(135deg, #075e36, #0b8b51);
-            color: white;
-            text-align: center;
-            padding: 60px 20px;
-        }
-
-        .hero h1 {
-            font-size: 42px;
-            margin-bottom: 10px;
-        }
-
-        .hero p {
-            color: #e7f5ed;
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: auto;
-            padding: 45px 20px;
-        }
-
-        .section-title {
-            color: #075e36;
-            font-size: 27px;
-            margin-bottom: 18px;
-        }
-
-        .card {
-            background: white;
-            border: 1px solid #e1e9e4;
-            border-radius: 16px;
-            padding: 25px;
-            margin-bottom: 30px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.04);
-        }
-
-        .profile-header {
-            display: flex;
-            align-items: center;
-            gap: 18px;
-            margin-bottom: 25px;
-        }
-
-        .profile-icon {
-            width: 70px;
-            height: 70px;
-            border-radius: 50%;
-            background: #e7f6ed;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 34px;
-        }
-
-        .profile-header h2 {
-            color: #075e36;
-        }
-
-        .profile-header p {
-            color: #6b7280;
-        }
-
-        .form-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 18px;
-        }
-
-        .form-group label {
-            display: block;
-            font-weight: bold;
-            margin-bottom: 7px;
-        }
-
-        .form-group input,
-        .form-group select,
-        .form-group textarea {
-            width: 100%;
-            padding: 11px;
-            border: 1px solid #d5ddd8;
-            border-radius: 7px;
-            outline: none;
-        }
-
-        .form-group textarea {
-            min-height: 100px;
-            resize: vertical;
-        }
-
-        .form-group input:focus,
-        .form-group select:focus,
-        .form-group textarea:focus {
-            border-color: #087443;
-        }
-
-        .btn {
-            border: none;
-            border-radius: 8px;
-            padding: 12px 20px;
-            cursor: pointer;
-            font-weight: bold;
-        }
-
-        .btn-primary {
-            background: #087443;
-            color: white;
-        }
-
-        .btn-gold {
-            background: #c99c24;
-            color: white;
-        }
-
-        .btn-light {
-            background: #e9f7ef;
-            color: #075e36;
-        }
-
-        .btn-danger {
-            background: #d64545;
-            color: white;
-        }
-
-        .btn:hover {
-            opacity: 0.9;
-        }
-
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 18px;
-            margin-bottom: 35px;
-        }
-
-        .stat-card {
-            background: white;
-            border: 1px solid #e1e9e4;
-            border-radius: 14px;
-            padding: 22px;
-        }
-
-        .stat-icon {
-            font-size: 30px;
-            margin-bottom: 8px;
-        }
-
-        .stat-card h3 {
-            color: #075e36;
-            font-size: 25px;
-        }
-
-        .stat-card p {
-            color: #6b7280;
-            font-size: 13px;
-        }
-
-        .schedule-form {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 16px;
-        }
-
-        .schedule-actions {
-            margin-top: 18px;
-        }
-
-        .schedule-table-wrapper {
-            overflow-x: auto;
-        }
-
-        table {
-            width: 100%;
-            min-width: 800px;
-            border-collapse: collapse;
-        }
-
-        th,
-        td {
-            padding: 13px;
-            border-bottom: 1px solid #e5e7eb;
-            text-align: center;
-        }
-
-        th {
-            background: #087443;
-            color: white;
-        }
-
-        .student-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 18px;
-        }
-
-        .student-card {
-            border: 1px solid #e1e9e4;
-            border-radius: 12px;
-            padding: 20px;
-            background: #fbfdfc;
-        }
-
-        .student-avatar {
-            font-size: 35px;
-            margin-bottom: 8px;
-        }
-
-        .student-card h3 {
-            color: #075e36;
-            margin-bottom: 5px;
-        }
-
-        .student-card p {
-            color: #6b7280;
-            font-size: 13px;
-            margin-bottom: 5px;
-        }
-
-        .homework-form {
-            display: grid;
-            gap: 15px;
-        }
-
-        .assignment-list {
-            margin-top: 20px;
-        }
-
-        .assignment {
-            padding: 15px;
-            border-bottom: 1px solid #e5e7eb;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            gap: 15px;
-        }
-
-        .assignment h3 {
-            color: #075e36;
-        }
-
-        .assignment p {
-            color: #6b7280;
-            font-size: 13px;
-        }
-
-        .status {
-            display: inline-block;
-            padding: 5px 10px;
-            border-radius: 15px;
-            font-size: 12px;
-            font-weight: bold;
-        }
-
-        .pending {
-            background: #fff3d6;
-            color: #8b6800;
-        }
-
-        .approved {
-            background: #e3f6ea;
-            color: #087443;
-        }
-
-        .chat-area {
-            background: #f5faf7;
-            border-radius: 12px;
-            padding: 20px;
-            min-height: 230px;
-            margin-bottom: 15px;
-        }
-
-        .chat-message {
-            display: flex;
-            margin-bottom: 12px;
-        }
-
-        .chat-message.teacher {
-            justify-content: flex-end;
-        }
-
-        .chat-message.student {
-            justify-content: flex-start;
-        }
-
-        .message {
-            max-width: 70%;
-            padding: 11px 15px;
-            border-radius: 13px;
-        }
-
-        .teacher .message {
-            background: #087443;
-            color: white;
-        }
-
-        .student .message {
-            background: #e2f4e9;
-        }
-
-        .message small {
-            display: block;
-            margin-top: 4px;
-            font-size: 10px;
-            opacity: 0.7;
-        }
-
-        .chat-input {
-            display: flex;
-            gap: 10px;
-        }
-
-        .chat-input input {
-            flex: 1;
-            padding: 12px;
-            border: 1px solid #d5ddd8;
-            border-radius: 8px;
-        }
-
-        .fee-box {
-            background: #f4faf6;
-            border-radius: 12px;
-            padding: 20px;
-            margin-top: 15px;
-        }
-
-        .fee-box strong {
-            color: #075e36;
-            font-size: 28px;
-        }
-
-        footer {
-            background: #10251c;
-            color: white;
-            text-align: center;
-            padding: 35px 20px;
-        }
-
-        footer p {
-            color: #bdc9c2;
-            margin-top: 7px;
-            font-size: 13px;
-        }
-
-        @media (max-width: 950px) {
-            .stats-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-
-            .student-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-
-            .schedule-form {
-                grid-template-columns: repeat(2, 1fr);
-            }
-        }
-
-        @media (max-width: 650px) {
-            .navbar {
-                flex-direction: column;
-                padding: 15px;
-            }
-
-            .hero h1 {
-                font-size: 32px;
-            }
-
-            .form-grid,
-            .schedule-form,
-            .stats-grid,
-            .student-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .assignment {
-                flex-direction: column;
-                align-items: flex-start;
-            }
-
-            .chat-input {
-                flex-direction: column;
-            }
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Teacher Dashboard - Learn Hub Quran</title>
+
+<style>
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #f5f8f5;
+    color: #222;
+}
+
+header {
+    background: #0b6b3a;
+    color: white;
+    padding: 15px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    font-size: 22px;
+    font-weight: bold;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    margin: 5px 8px;
+    display: inline-block;
+}
+
+nav a:hover {
+    text-decoration: underline;
+}
+
+.language-box select {
+    padding: 7px;
+    border-radius: 5px;
+    border: none;
+}
+
+.hero {
+    background: #0b6b3a;
+    color: white;
+    text-align: center;
+    padding: 35px 15px;
+}
+
+.hero h1 {
+    margin: 0 0 10px;
+}
+
+.container {
+    max-width: 1100px;
+    margin: auto;
+    padding: 20px;
+}
+
+.card {
+    background: white;
+    padding: 20px;
+    margin-bottom: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+}
+
+.card h2 {
+    color: #0b6b3a;
+    margin-top: 0;
+}
+
+.form-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 15px;
+}
+
+label {
+    font-weight: bold;
+    display: block;
+    margin-bottom: 5px;
+}
+
+input,
+select,
+textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+}
+
+textarea {
+    min-height: 100px;
+    resize: vertical;
+}
+
+button {
+    background: #0b6b3a;
+    color: white;
+    border: none;
+    padding: 10px 18px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 15px;
+}
+
+button:hover {
+    background: #084f2b;
+}
+
+.gold-button {
+    background: #c99616;
+}
+
+.gold-button:hover {
+    background: #a8790e;
+}
+
+.stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 15px;
+}
+
+.stat {
+    background: #eef7f0;
+    padding: 20px;
+    text-align: center;
+    border-radius: 8px;
+}
+
+.stat h3 {
+    margin: 0;
+    font-size: 30px;
+    color: #0b6b3a;
+}
+
+.table-wrapper {
+    overflow-x: auto;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 800px;
+}
+
+th,
+td {
+    padding: 12px;
+    border: 1px solid #ddd;
+    text-align: center;
+}
+
+th {
+    background: #0b6b3a;
+    color: white;
+}
+
+.delete-button {
+    background: #b42318;
+    padding: 7px 12px;
+}
+
+.delete-button:hover {
+    background: #8f1c14;
+}
+
+.empty-message {
+    text-align: center;
+    padding: 20px;
+    color: #666;
+}
+
+.student-box {
+    background: #f7f7f7;
+    padding: 15px;
+    border-radius: 8px;
+    margin-bottom: 10px;
+}
+
+.assignment {
+    border-left: 4px solid #0b6b3a;
+    padding: 12px;
+    margin-bottom: 10px;
+    background: #f7f7f7;
+}
+
+.chat-area {
+    background: #f7f7f7;
+    padding: 15px;
+    min-height: 150px;
+    margin-bottom: 10px;
+    border-radius: 8px;
+}
+
+.chat-message {
+    background: white;
+    padding: 10px;
+    margin-bottom: 8px;
+    border-radius: 6px;
+}
+
+footer {
+    background: #0b6b3a;
+    color: white;
+    text-align: center;
+    padding: 20px;
+    margin-top: 30px;
+}
+
+@media (max-width: 600px) {
+    header {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    nav {
+        text-align: center;
+    }
+}
+</style>
 </head>
 
 <body>
 
 <header>
+    <div class="logo">Learn Hub Quran</div>
 
-    <div class="navbar">
+    <nav>
+        <a href="index.html">Home</a>
+        <a href="student.html">Student Dashboard</a>
+        <a href="teacher.html">Teacher Dashboard</a>
+        <a href="live-classes.html">Live Classes</a>
+    </nav>
 
-        <a href="index.html" class="logo">
-            Learn <span>Hub Quran</span>
-        </a>
-
-        <nav class="nav-links">
-
-            <a href="index.html">Home</a>
-
-            <a href="student.html">Student</a>
-
-            <a href="teacher.html">Teacher</a>
-
-            <a href="live-classes.html">Live Classes</a>
-
-            <select
-                class="language-select"
-                id="languageSelect"
-                onchange="selectLanguage(this.value)">
-
-                <option>English</option>
-                <option>Urdu</option>
-                <option>Arabic</option>
-                <option>Hindi</option>
-                <option>Bengali</option>
-                <option>Persian</option>
-                <option>Turkish</option>
-                <option>Indonesian</option>
-                <option>Malay</option>
-                <option>French</option>
-                <option>Spanish</option>
-                <option>German</option>
-                <option>Italian</option>
-                <option>Portuguese</option>
-                <option>Russian</option>
-                <option>Chinese</option>
-                <option>Japanese</option>
-                <option>Korean</option>
-                <option>Thai</option>
-                <option>Vietnamese</option>
-                <option>Tamil</option>
-                <option>Telugu</option>
-                <option>Malayalam</option>
-                <option>Kannada</option>
-                <option>Marathi</option>
-                <option>Gujarati</option>
-                <option>Punjabi</option>
-                <option>Dutch</option>
-                <option>Greek</option>
-                <option>Swahili</option>
-
-            </select>
-
-        </nav>
-
+    <div class="language-box">
+        <select id="languageSelect" onchange="selectLanguage()">
+            <option value="English">English</option>
+            <option value="Urdu">Urdu</option>
+            <option value="Arabic">Arabic</option>
+            <option value="Hindi">Hindi</option>
+            <option value="Bengali">Bengali</option>
+            <option value="Persian">Persian</option>
+            <option value="Turkish">Turkish</option>
+            <option value="Indonesian">Indonesian</option>
+            <option value="Malay">Malay</option>
+            <option value="French">French</option>
+            <option value="Spanish">Spanish</option>
+            <option value="German">German</option>
+            <option value="Italian">Italian</option>
+            <option value="Portuguese">Portuguese</option>
+            <option value="Russian">Russian</option>
+            <option value="Chinese">Chinese</option>
+            <option value="Japanese">Japanese</option>
+            <option value="Korean">Korean</option>
+            <option value="Thai">Thai</option>
+            <option value="Vietnamese">Vietnamese</option>
+            <option value="Tamil">Tamil</option>
+            <option value="Telugu">Telugu</option>
+            <option value="Malayalam">Malayalam</option>
+            <option value="Kannada">Kannada</option>
+            <option value="Marathi">Marathi</option>
+            <option value="Gujarati">Gujarati</option>
+            <option value="Punjabi">Punjabi</option>
+            <option value="Dutch">Dutch</option>
+            <option value="Greek">Greek</option>
+            <option value="Swahili">Swahili</option>
+        </select>
     </div>
-
 </header>
 
-
 <section class="hero">
-
     <h1>Teacher Dashboard</h1>
-
-    <p>
-        Manage your profile, students, live classes,
-        homework, and teaching schedule.
-    </p>
-
+    <p>Manage your Quran teaching, classes, students and assignments.</p>
 </section>
 
+<div class="container">
 
-<main class="container">
-
-
-    <section class="card">
-
-        <div class="profile-header">
-
-            <div class="profile-icon">
-                🧑‍🏫
-            </div>
-
-            <div>
-
-                <h2>Teacher Profile</h2>
-
-                <p>
-                    Complete your teacher information.
-                </p>
-
-            </div>
-
-        </div>
-
+    <!-- Teacher Profile -->
+    <div class="card">
+        <h2>Teacher Profile</h2>
 
         <div class="form-grid">
 
-            <div class="form-group">
-
-                <label>Full Name</label>
-
-                <input
-                    type="text"
-                    id="teacherName"
-                    placeholder="Enter your full name">
-
+            <div>
+                <label>Teacher Name</label>
+                <input type="text" id="teacherName">
             </div>
 
-
-            <div class="form-group">
-
+            <div>
                 <label>Date of Birth</label>
-
-                <input
-                    type="date"
-                    id="teacherDob">
-
+                <input type="date" id="teacherDob">
             </div>
 
-
-            <div class="form-group">
-
-                <label>Email Address</label>
-
-                <input
-                    type="email"
-                    id="teacherEmail"
-                    placeholder="Enter your email">
-
+            <div>
+                <label>Email</label>
+                <input type="email" id="teacherEmail">
             </div>
 
-
-            <div class="form-group">
-
-                <label>Phone Number</label>
-
-                <input
-                    type="tel"
-                    id="teacherPhone"
-                    placeholder="Enter your phone number">
-
+            <div>
+                <label>Phone</label>
+                <input type="tel" id="teacherPhone">
             </div>
 
-
-            <div class="form-group">
-
+            <div>
                 <label>Country</label>
-
-                <input
-                    type="text"
-                    id="teacherCountry"
-                    placeholder="Enter your country">
-
+                <input type="text" id="teacherCountry">
             </div>
 
-
-            <div class="form-group">
-
-                <label>Teaching Language</label>
-
+            <div>
+                <label>Language</label>
                 <select id="teacherLanguage">
-
-                    <option>English</option>
-                    <option>Urdu</option>
-                    <option>Arabic</option>
-                    <option>Hindi</option>
-                    <option>Bengali</option>
-                    <option>Persian</option>
-                    <option>Turkish</option>
-                    <option>Indonesian</option>
-                    <option>Malay</option>
-                    <option>French</option>
-                    <option>Spanish</option>
-                    <option>German</option>
-                    <option>Italian</option>
-                    <option>Portuguese</option>
-                    <option>Russian</option>
-                    <option>Chinese</option>
-                    <option>Japanese</option>
-                    <option>Korean</option>
-                    <option>Thai</option>
-                    <option>Vietnamese</option>
-                    <option>Tamil</option>
-                    <option>Telugu</option>
-                    <option>Malayalam</option>
-                    <option>Kannada</option>
-                    <option>Marathi</option>
-                    <option>Gujarati</option>
-                    <option>Punjabi</option>
-                    <option>Dutch</option>
-                    <option>Greek</option>
-                    <option>Swahili</option>
-
+                    <option value="English">English</option>
+                    <option value="Urdu">Urdu</option>
+                    <option value="Arabic">Arabic</option>
+                    <option value="Hindi">Hindi</option>
+                    <option value="Bengali">Bengali</option>
+                    <option value="Persian">Persian</option>
+                    <option value="Turkish">Turkish</option>
+                    <option value="Indonesian">Indonesian</option>
+                    <option value="Malay">Malay</option>
+                    <option value="French">French</option>
+                    <option value="Spanish">Spanish</option>
+                    <option value="German">German</option>
+                    <option value="Italian">Italian</option>
+                    <option value="Portuguese">Portuguese</option>
+                    <option value="Russian">Russian</option>
+                    <option value="Chinese">Chinese</option>
+                    <option value="Japanese">Japanese</option>
+                    <option value="Korean">Korean</option>
+                    <option value="Thai">Thai</option>
+                    <option value="Vietnamese">Vietnamese</option>
+                    <option value="Tamil">Tamil</option>
+                    <option value="Telugu">Telugu</option>
+                    <option value="Malayalam">Malayalam</option>
+                    <option value="Kannada">Kannada</option>
+                    <option value="Marathi">Marathi</option>
+                    <option value="Gujarati">Gujarati</option>
+                    <option value="Punjabi">Punjabi</option>
+                    <option value="Dutch">Dutch</option>
+                    <option value="Greek">Greek</option>
+                    <option value="Swahili">Swahili</option>
                 </select>
-
             </div>
 
-
-            <div class="form-group">
-
-                <label>Quran Qualification</label>
-
-                <select id="qualification">
-
-                    <option>Hafiz-e-Quran</option>
-                    <option>Qari</option>
-                    <option>Alim</option>
-                    <option>Ijazah</option>
-                    <option>Quran Teacher</option>
-
-                </select>
-
+            <div>
+                <label>Qualification</label>
+                <input type="text" id="qualification">
             </div>
 
-
-            <div class="form-group">
-
-                <label>Teaching Experience</label>
-
-                <input
-                    type="text"
-                    id="experience"
-                    placeholder="Example: 5 years">
-
+            <div>
+                <label>Experience</label>
+                <input type="text" id="experience">
             </div>
 
         </div>
 
+        <br>
 
-        <div class="form-group" style="margin-top:18px;">
+        <label>About Teacher</label>
+        <textarea id="teacherAbout"></textarea>
 
-            <label>About Teacher</label>
+        <br><br>
 
-            <textarea
-                id="teacherAbout"
-                placeholder="Write a short introduction about yourself"></textarea>
-
-        </div>
-
-
-        <div style="margin-top:18px;">
-
-            <button
-                class="btn btn-primary"
-                onclick="saveTeacherProfile()">
-
-                Save Teacher Profile
-
-            </button>
-
-        </div>
-
-    </section>
+        <button onclick="saveTeacherProfile()">Save Teacher Profile</button>
+    </div>
 
 
-    <h2 class="section-title">
-        Teaching Overview
-    </h2>
+    <!-- Teaching Overview -->
+    <div class="card">
+        <h2>Teaching Overview</h2>
 
+        <div class="stats">
 
-    <section class="stats-grid">
+            <div class="stat">
+                <h3 id="scheduleCount">0</h3>
+                <p>Live Classes</p>
+            </div>
 
-        <div class="stat-card">
+            <div class="stat">
+                <h3>0</h3>
+                <p>My Students</p>
+            </div>
 
-            <div class="stat-icon">👨‍🎓</div>
+            <div class="stat">
+                <h3>0</h3>
+                <p>Assignments</p>
+            </div>
 
-            <h3>0</h3>
-
-            <p>Students</p>
+            <div class="stat">
+                <h3>Active</h3>
+                <p>Teacher Status</p>
+            </div>
 
         </div>
+    </div>
 
 
-        <div class="stat-card">
+    <!-- Live Class Schedule -->
+    <div class="card">
+        <h2>My Live Class Schedule</h2>
 
-            <div class="stat-icon">📅</div>
+        <div class="form-grid">
 
-            <h3>0</h3>
-
-            <p>Scheduled Classes</p>
-
-        </div>
-
-
-        <div class="stat-card">
-
-            <div class="stat-icon">📝</div>
-
-            <h3>0</h3>
-
-            <p>Assignments</p>
-
-        </div>
-
-
-        <div class="stat-card">
-
-            <div class="stat-icon">⭐</div>
-
-            <h3>New</h3>
-
-            <p>Teacher Status</p>
-
-        </div>
-
-    </section>
-
-
-    <h2 class="section-title">
-        My Live Class Schedule
-    </h2>
-
-
-    <section class="card">
-
-        <p style="color:#6b7280; margin-bottom:20px;">
-            The teacher can choose the day and time
-            for their own available classes.
-        </p>
-
-
-        <div class="schedule-form">
-
-            <div class="form-group">
-
-                <label>Day</label>
-
+            <div>
+                <label>Class Day</label>
                 <select id="classDay">
-
-                    <option>Monday</option>
-                    <option>Tuesday</option>
-                    <option>Wednesday</option>
-                    <option>Thursday</option>
-                    <option>Friday</option>
-                    <option>Saturday</option>
-                    <option>Sunday</option>
-
+                    <option value="Monday">Monday</option>
+                    <option value="Tuesday">Tuesday</option>
+                    <option value="Wednesday">Wednesday</option>
+                    <option value="Thursday">Thursday</option>
+                    <option value="Friday">Friday</option>
+                    <option value="Saturday">Saturday</option>
+                    <option value="Sunday">Sunday</option>
                 </select>
-
             </div>
 
-
-            <div class="form-group">
-
+            <div>
                 <label>Start Time</label>
-
-                <input
-                    type="time"
-                    id="startTime">
-
+                <input type="time" id="startTime">
             </div>
 
-
-            <div class="form-group">
-
+            <div>
                 <label>End Time</label>
-
-                <input
-                    type="time"
-                    id="endTime">
-
+                <input type="time" id="endTime">
             </div>
 
-
-            <div class="form-group">
-
+            <div>
                 <label>Quran Program</label>
-
                 <select id="classProgram">
-
-                    <option>Reading Quran</option>
-                    <option>Hifz-e-Jadeed</option>
-                    <option>Mushq Quran</option>
-                    <option>Hadar Quran</option>
-
+                    <option value="Hifz-e-Jadeed">Hifz-e-Jadeed</option>
+                    <option value="Reading Quran">Reading Quran</option>
+                    <option value="Mushq Quran">Mushq Quran</option>
+                    <option value="Hadar Quran">Hadar Quran</option>
                 </select>
-
             </div>
 
-
-            <div class="form-group">
-
+            <div>
                 <label>Class Language</label>
-
                 <select id="classLanguage">
-
-                    <option>English</option>
-                    <option>Urdu</option>
-                    <option>Arabic</option>
-                    <option>Hindi</option>
-                    <option>Bengali</option>
-                    <option>Persian</option>
-                    <option>Turkish</option>
-                    <option>Indonesian</option>
-                    <option>Malay</option>
-                    <option>French</option>
-                    <option>Spanish</option>
-                    <option>German</option>
-                    <option>Italian</option>
-                    <option>Portuguese</option>
-                    <option>Russian</option>
-                    <option>Chinese</option>
-                    <option>Japanese</option>
-                    <option>Korean</option>
-                    <option>Thai</option>
-                    <option>Vietnamese</option>
-                    <option>Tamil</option>
-                    <option>Telugu</option>
-                    <option>Malayalam</option>
-                    <option>Kannada</option>
-                    <option>Marathi</option>
-                    <option>Gujarati</option>
-                    <option>Punjabi</option>
-                    <option>Dutch</option>
-                    <option>Greek</option>
-                    <option>Swahili</option>
-
+                    <option value="English">English</option>
+                    <option value="Urdu">Urdu</option>
+                    <option value="Arabic">Arabic</option>
+                    <option value="Hindi">Hindi</option>
+                    <option value="Bengali">Bengali</option>
+                    <option value="Persian">Persian</option>
+                    <option value="Turkish">Turkish</option>
+                    <option value="Indonesian">Indonesian</option>
+                    <option value="Malay">Malay</option>
+                    <option value="French">French</option>
+                    <option value="Spanish">Spanish</option>
+                    <option value="German">German</option>
+                    <option value="Italian">Italian</option>
+                    <option value="Portuguese">Portuguese</option>
+                    <option value="Russian">Russian</option>
+                    <option value="Chinese">Chinese</option>
+                    <option value="Japanese">Japanese</option>
+                    <option value="Korean">Korean</option>
+                    <option value="Thai">Thai</option>
+                    <option value="Vietnamese">Vietnamese</option>
+                    <option value="Tamil">Tamil</option>
+                    <option value="Telugu">Telugu</option>
+                    <option value="Malayalam">Malayalam</option>
+                    <option value="Kannada">Kannada</option>
+                    <option value="Marathi">Marathi</option>
+                    <option value="Gujarati">Gujarati</option>
+                    <option value="Punjabi">Punjabi</option>
+                    <option value="Dutch">Dutch</option>
+                    <option value="Greek">Greek</option>
+                    <option value="Swahili">Swahili</option>
                 </select>
-
             </div>
 
-
-            <div class="form-group">
-
+            <div>
                 <label>Class Capacity</label>
-
-                <input
-                    type="number"
-                    id="capacity"
-                    min="1"
-                    max="50"
-                    placeholder="Number of students">
-
+                <input type="number" id="capacity" min="1" max="100" placeholder="Example: 4">
             </div>
 
         </div>
 
+        <br>
 
-        <div class="schedule-actions">
+        <button onclick="addSchedule()">Add Class Schedule</button>
 
-            <button
-                class="btn btn-primary"
-                onclick="addSchedule()">
+        <br><br>
 
-                Add Class Schedule
-
-            </button>
-
-        </div>
-
-    </section>
-
-
-    <section class="card">
-
-        <div class="schedule-table-wrapper">
-
+        <div class="table-wrapper">
             <table>
-
                 <thead>
-
                     <tr>
                         <th>Day</th>
                         <th>Time</th>
                         <th>Program</th>
                         <th>Language</th>
                         <th>Capacity</th>
+                        <th>Teacher</th>
                         <th>Action</th>
                     </tr>
-
                 </thead>
 
                 <tbody id="scheduleBody">
-
-                    <tr id="emptySchedule">
-
-                        <td colspan="6">
-                            No class schedule added yet.
-                        </td>
-
-                    </tr>
-
                 </tbody>
-
             </table>
-
         </div>
 
-    </section>
-
-
-    <h2 class="section-title">
-        My Students
-    </h2>
-
-
-    <section class="card">
-
-        <div class="student-grid">
-
-            <div class="student-card">
-
-                <div class="student-avatar">👨‍🎓</div>
-
-                <h3>Student Account</h3>
-
-                <p>
-                    Students will appear here after assignment.
-                </p>
-
-                <span class="status pending">
-                    Waiting
-                </span>
-
-            </div>
-
-
-            <div class="student-card">
-
-                <div class="student-avatar">📖</div>
-
-                <h3>Quran Reading</h3>
-
-                <p>
-                    Track reading progress here.
-                </p>
-
-                <span class="status approved">
-                    Active
-                </span>
-
-            </div>
-
-
-            <div class="student-card">
-
-                <div class="student-avatar">🧠</div>
-
-                <h3>Hifz Student</h3>
-
-                <p>
-                    Track memorization progress here.
-                </p>
-
-                <span class="status approved">
-                    Active
-                </span>
-
-            </div>
-
-        </div>
-
-    </section>
-
-
-    <h2 class="section-title">
-        Homework & Assignments
-    </h2>
-
-
-    <section class="card">
-
-        <div class="homework-form">
-
-            <div class="form-group">
-
-                <label>Assignment Title</label>
-
-                <input
-                    type="text"
-                    id="assignmentTitle"
-                    placeholder="Example: Surah Al-Baqarah revision">
-
-            </div>
-
-
-            <div class="form-group">
-
-                <label>Assignment Details</label>
-
-                <textarea
-                    id="assignmentDetails"
-                    placeholder="Write homework instructions"></textarea>
-
-            </div>
-
-
-            <div class="form-group">
-
-                <label>Due Date</label>
-
-                <input
-                    type="date"
-                    id="assignmentDate">
-
-            </div>
-
-
-            <div>
-
-                <button
-                    class="btn btn-primary"
-                    onclick="createAssignment()">
-
-                    Create Assignment
-
-                </button>
-
-            </div>
-
-        </div>
-
-
-        <div
-            class="assignment-list"
-            id="assignmentList">
-
-        </div>
-
-    </section>
-
-
-    <h2 class="section-title">
-        Student Communication
-    </h2>
-
-
-    <section class="card">
-
-        <div class="chat-area" id="teacherChat">
-
-            <div class="chat-message student">
-
-                <div class="message">
-
-                    Student messages will appear here.
-
-                    <small>
-                        Student
-                    </small>
-
-                </div>
-
-            </div>
-
-        </div>
-
-
-        <div class="chat-input">
-
-            <input
-                type="text"
-                id="teacherMessage"
-                placeholder="Type a message">
-
-            <button
-                class="btn btn-primary"
-                onclick="sendTeacherMessage()">
-
-                Send
-
-            </button>
-
-        </div>
-
-    </section>
-
-
-    <h2 class="section-title">
-        Teacher Admission
-    </h2>
-
-
-    <section class="card">
-
-        <p>
-            Teacher admission requires the admission fee
-            before the screening test and interview process.
+        <p id="emptySchedule" class="empty-message">
+            No class schedule added yet.
         </p>
 
+    </div>
 
-        <div class="fee-box">
 
-            <p>
-                Teacher Admission Fee
-            </p>
+    <!-- My Students -->
+    <div class="card">
+        <h2>My Students</h2>
 
-            <strong>
-                $7 USD
-            </strong>
+        <div class="student-box">
+            <strong>No students assigned yet.</strong>
+            <p>Students will appear here after enrollment.</p>
+        </div>
+    </div>
 
-            <p style="margin-top:8px;">
-                After payment, the teacher can proceed
-                to the screening test.
-            </p>
+
+    <!-- Homework and Assignment -->
+    <div class="card">
+        <h2>Homework and Assignment</h2>
+
+        <div class="form-grid">
+
+            <div>
+                <label>Assignment Title</label>
+                <input type="text" id="assignmentTitle">
+            </div>
+
+            <div>
+                <label>Due Date</label>
+                <input type="date" id="assignmentDate">
+            </div>
 
         </div>
 
+        <br>
 
-        <div style="margin-top:18px;">
+        <label>Assignment Details</label>
+        <textarea id="assignmentDetails"></textarea>
 
-            <button
-                class="btn btn-gold"
-                onclick="startTeacherProcess()">
+        <br><br>
 
-                Continue Teacher Application
+        <button onclick="createAssignment()">Create Assignment</button>
 
-            </button>
+        <br><br>
 
+        <div id="assignmentList"></div>
+    </div>
+
+
+    <!-- Student Communication -->
+    <div class="card">
+        <h2>Student Communication</h2>
+
+        <div id="teacherChat" class="chat-area">
+            <div class="chat-message">
+                <strong>System:</strong> Teacher communication area is ready.
+            </div>
         </div>
 
-    </section>
+        <input
+            type="text"
+            id="teacherMessage"
+            placeholder="Write a message"
+        >
 
-</main>
+        <br><br>
+
+        <button onclick="sendTeacherMessage()">Send Message</button>
+    </div>
+
+
+    <!-- Teacher Admission -->
+    <div class="card">
+        <h2>Teacher Admission</h2>
+
+        <p>
+            Teacher Application Fee:
+            <strong>Rs. 2,000 (approximately $7 USD)</strong>
+        </p>
+
+        <p>
+            Teacher application process:
+            Admission Fee → Screening Test → Interview → Selection
+        </p>
+
+        <button class="gold-button" onclick="startTeacherProcess()">
+            Start Teacher Application
+        </button>
+    </div>
+
+</div>
 
 
 <footer>
-
-    <strong>
-        Learn Hub Quran
-    </strong>
-
-    <p>
-        Online Quran learning platform for students
-        and qualified Quran teachers.
-    </p>
-
-    <p>
-        Contact: Sjan70985@gmail.com |
-        03255411647
-    </p>
-
-    <p>
-        © 2026 Learn Hub Quran. All rights reserved.
-    </p>
-
+    <p>Learn Hub Quran</p>
+    <p>Quran Education for Students Worldwide</p>
 </footer>
 
 
 <script>
 
-    function selectLanguage(language) {
+const SCHEDULE_KEY = "learnHubQuranSchedules";
+const TEACHER_PROFILE_KEY = "teacherProfile";
 
-        localStorage.setItem(
-            "teacherLanguage",
-            language
-        );
 
-        alert(
-            "Language selected: " + language
-        );
+function selectLanguage() {
+    const language = document.getElementById("languageSelect").value;
+
+    localStorage.setItem("teacherLanguage", language);
+}
+
+
+function saveTeacherProfile() {
+
+    const profile = {
+        name: document.getElementById("teacherName").value,
+        dob: document.getElementById("teacherDob").value,
+        email: document.getElementById("teacherEmail").value,
+        phone: document.getElementById("teacherPhone").value,
+        country: document.getElementById("teacherCountry").value,
+        language: document.getElementById("teacherLanguage").value,
+        qualification: document.getElementById("qualification").value,
+        experience: document.getElementById("experience").value,
+        about: document.getElementById("teacherAbout").value
+    };
+
+    localStorage.setItem(
+        TEACHER_PROFILE_KEY,
+        JSON.stringify(profile)
+    );
+
+    alert("Teacher profile saved successfully.");
+}
+
+
+function getSchedules() {
+
+    const savedSchedules =
+        localStorage.getItem(SCHEDULE_KEY);
+
+    if (!savedSchedules) {
+        return [];
     }
 
-
-    function saveTeacherProfile() {
-
-        const profile = {
-
-            name:
-                document.getElementById("teacherName").value,
-
-            dob:
-                document.getElementById("teacherDob").value,
-
-            email:
-                document.getElementById("teacherEmail").value,
-
-            phone:
-                document.getElementById("teacherPhone").value,
-
-            country:
-                document.getElementById("teacherCountry").value,
-
-            language:
-                document.getElementById("teacherLanguage").value,
-
-            qualification:
-                document.getElementById("qualification").value,
-
-            experience:
-                document.getElementById("experience").value,
-
-            about:
-                document.getElementById("teacherAbout").value
-        };
+    try {
+        return JSON.parse(savedSchedules);
+    } catch (error) {
+        return [];
+    }
+}
 
 
-        localStorage.setItem(
-            "teacherProfile",
-            JSON.stringify(profile)
-        );
+function saveSchedules(schedules) {
+
+    localStorage.setItem(
+        SCHEDULE_KEY,
+        JSON.stringify(schedules)
+    );
+}
 
 
-        alert(
-            "Teacher profile saved successfully."
-        );
+function addSchedule() {
+
+    const day =
+        document.getElementById("classDay").value;
+
+    const start =
+        document.getElementById("startTime").value;
+
+    const end =
+        document.getElementById("endTime").value;
+
+    const program =
+        document.getElementById("classProgram").value;
+
+    const language =
+        document.getElementById("classLanguage").value;
+
+    const capacity =
+        document.getElementById("capacity").value;
+
+    if (!start || !end || !capacity) {
+        alert("Please enter start time, end time, and class capacity.");
+        return;
     }
 
+    if (start >= end) {
+        alert("End time must be later than start time.");
+        return;
+    }
 
-    function addSchedule() {
+    if (Number(capacity) < 1) {
+        alert("Class capacity must be at least 1.");
+        return;
+    }
 
-        const day =
-            document.getElementById("classDay").value;
+    const teacherProfile =
+        JSON.parse(
+            localStorage.getItem(TEACHER_PROFILE_KEY) || "{}"
+        );
 
-        const start =
-            document.getElementById("startTime").value;
+    const teacherName =
+        teacherProfile.name || "Quran Teacher";
 
-        const end =
-            document.getElementById("endTime").value;
+    const newSchedule = {
 
-        const program =
-            document.getElementById("classProgram").value;
+        id: Date.now().toString(),
 
-        const language =
-            document.getElementById("classLanguage").value;
+        day: day,
 
-        const capacity =
-            document.getElementById("capacity").value;
+        start: start,
 
+        end: end,
 
-        if (
-            start === "" ||
-            end === "" ||
-            capacity === ""
-        ) {
+        program: program,
 
-            alert(
-                "Please enter start time, end time, and class capacity."
-            );
+        language: language,
 
-            return;
-        }
+        capacity: Number(capacity),
 
+        teacherName: teacherName
 
-        if (start >= end) {
+    };
 
-            alert(
-                "End time must be later than start time."
-            );
+    const schedules = getSchedules();
 
-            return;
-        }
+    schedules.push(newSchedule);
 
+    saveSchedules(schedules);
 
-        const table =
-            document.getElementById("scheduleBody");
+    renderSchedules();
 
-        const empty =
-            document.getElementById("emptySchedule");
+    document.getElementById("startTime").value = "";
+    document.getElementById("endTime").value = "";
+    document.getElementById("capacity").value = "";
+
+    alert("Class Schedule Added Successfully.");
+}
 
 
-        if (empty) {
-            empty.remove();
-        }
+function renderSchedules() {
 
+    const scheduleBody =
+        document.getElementById("scheduleBody");
+
+    const emptySchedule =
+        document.getElementById("emptySchedule");
+
+    const schedules = getSchedules();
+
+    scheduleBody.innerHTML = "";
+
+    if (schedules.length === 0) {
+
+        emptySchedule.style.display = "block";
+
+        updateScheduleCount();
+
+        return;
+    }
+
+    emptySchedule.style.display = "none";
+
+    schedules.forEach(function(schedule) {
 
         const row =
             document.createElement("tr");
 
-
         row.innerHTML = `
 
-            <td>${escapeHTML(day)}</td>
+            <td>${escapeHTML(schedule.day)}</td>
 
             <td>
-                ${escapeHTML(start)}
+                ${escapeHTML(schedule.start)}
                 -
-                ${escapeHTML(end)}
+                ${escapeHTML(schedule.end)}
             </td>
 
-            <td>${escapeHTML(program)}</td>
+            <td>${escapeHTML(schedule.program)}</td>
 
-            <td>${escapeHTML(language)}</td>
+            <td>${escapeHTML(schedule.language)}</td>
 
-            <td>${escapeHTML(capacity)}</td>
+            <td>${escapeHTML(String(schedule.capacity))}</td>
+
+            <td>${escapeHTML(schedule.teacherName)}</td>
 
             <td>
-
                 <button
-                    class="btn btn-danger"
-                    onclick="this.closest('tr').remove()">
-
+                    class="delete-button"
+                    onclick="deleteSchedule('${schedule.id}')">
                     Delete
-
                 </button>
-
             </td>
 
         `;
 
+        scheduleBody.appendChild(row);
+    });
 
-        table.appendChild(row);
+    updateScheduleCount();
+}
 
 
-        alert(
-            "Class schedule added successfully."
-        );
+function deleteSchedule(id) {
+
+    const schedules = getSchedules();
+
+    const updatedSchedules =
+        schedules.filter(function(schedule) {
+            return schedule.id !== id;
+        });
+
+    saveSchedules(updatedSchedules);
+
+    renderSchedules();
+
+    alert("Class Schedule Deleted Successfully.");
+}
+
+
+function updateScheduleCount() {
+
+    const schedules = getSchedules();
+
+    document.getElementById("scheduleCount").textContent =
+        schedules.length;
+}
+
+
+function createAssignment() {
+
+    const title =
+        document.getElementById("assignmentTitle").value.trim();
+
+    const details =
+        document.getElementById("assignmentDetails").value.trim();
+
+    const date =
+        document.getElementById("assignmentDate").value;
+
+    if (!title || !details || !date) {
+
+        alert("Please complete the assignment information.");
+
+        return;
+    }
+
+    const assignmentList =
+        document.getElementById("assignmentList");
+
+    const assignment =
+        document.createElement("div");
+
+    assignment.className = "assignment";
+
+    assignment.innerHTML = `
+
+        <strong>${escapeHTML(title)}</strong>
+
+        <p>${escapeHTML(details)}</p>
+
+        <small>
+            Due Date: ${escapeHTML(date)}
+        </small>
+
+    `;
+
+    assignmentList.appendChild(assignment);
+
+    document.getElementById("assignmentTitle").value = "";
+    document.getElementById("assignmentDetails").value = "";
+    document.getElementById("assignmentDate").value = "";
+
+    alert("Assignment created successfully.");
+}
+
+
+function sendTeacherMessage() {
+
+    const input =
+        document.getElementById("teacherMessage");
+
+    const message =
+        input.value.trim();
+
+    if (!message) {
+        return;
+    }
+
+    const chat =
+        document.getElementById("teacherChat");
+
+    const messageBox =
+        document.createElement("div");
+
+    messageBox.className = "chat-message";
+
+    messageBox.innerHTML =
+        "<strong>Teacher:</strong> " +
+        escapeHTML(message);
+
+    chat.appendChild(messageBox);
+
+    input.value = "";
+}
+
+
+function startTeacherProcess() {
+
+    alert(
+        "Teacher application process: " +
+        "Admission Fee Rs. 2,000 → " +
+        "Screening Test → Interview → Selection."
+    );
+}
+
+
+function escapeHTML(value) {
+
+    const div =
+        document.createElement("div");
+
+    div.textContent = value;
+
+    return div.innerHTML;
+}
+
+
+document.addEventListener("DOMContentLoaded", function() {
+
+    const savedLanguage =
+        localStorage.getItem("teacherLanguage");
+
+    if (savedLanguage) {
+
+        document.getElementById("languageSelect").value =
+            savedLanguage;
+
     }
 
 
-    function createAssignment() {
+    const savedProfile =
+        localStorage.getItem(TEACHER_PROFILE_KEY);
 
-        const title =
-            document.getElementById(
-                "assignmentTitle"
-            ).value.trim();
+    if (savedProfile) {
 
-
-        const details =
-            document.getElementById(
-                "assignmentDetails"
-            ).value.trim();
-
-
-        const date =
-            document.getElementById(
-                "assignmentDate"
-            ).value;
-
-
-        if (
-            title === "" ||
-            details === "" ||
-            date === ""
-        ) {
-
-            alert(
-                "Please complete all assignment fields."
-            );
-
-            return;
-        }
-
-
-        const list =
-            document.getElementById(
-                "assignmentList"
-            );
-
-
-        const item =
-            document.createElement("div");
-
-
-        item.className =
-            "assignment";
-
-
-        item.innerHTML = `
-
-            <div>
-
-                <h3>
-                    ${escapeHTML(title)}
-                </h3>
-
-                <p>
-                    ${escapeHTML(details)}
-                </p>
-
-                <p>
-                    Due Date:
-                    ${escapeHTML(date)}
-                </p>
-
-            </div>
-
-            <span class="status pending">
-                Pending
-            </span>
-
-        `;
-
-
-        list.appendChild(item);
-
-
-        document.getElementById(
-            "assignmentTitle"
-        ).value = "";
-
-
-        document.getElementById(
-            "assignmentDetails"
-        ).value = "";
-
-
-        document.getElementById(
-            "assignmentDate"
-        ).value = "";
-
-
-        alert(
-            "Assignment created successfully."
-        );
-    }
-
-
-    function sendTeacherMessage() {
-
-        const input =
-            document.getElementById(
-                "teacherMessage"
-            );
-
-
-        const text =
-            input.value.trim();
-
-
-        if (text === "") {
-
-            alert(
-                "Please type a message."
-            );
-
-            return;
-        }
-
-
-        const chat =
-            document.getElementById(
-                "teacherChat"
-            );
-
-
-        const wrapper =
-            document.createElement("div");
-
-
-        wrapper.className =
-            "chat-message teacher";
-
-
-        wrapper.innerHTML = `
-
-            <div class="message">
-
-                ${escapeHTML(text)}
-
-                <small>
-                    Teacher
-                </small>
-
-            </div>
-
-        `;
-
-
-        chat.appendChild(wrapper);
-
-
-        input.value = "";
-
-
-        chat.scrollTop =
-            chat.scrollHeight;
-    }
-
-
-    function startTeacherProcess() {
-
-        alert(
-            "Teacher application process: Admission Fee $7 USD → Screening Test → Interview → Selection."
-        );
-    }
-
-
-    function escapeHTML(text) {
-
-        const div =
-            document.createElement("div");
-
-        div.textContent =
-            text;
-
-        return div.innerHTML;
-    }
-
-
-    window.addEventListener(
-        "DOMContentLoaded",
-        function() {
-
-            const savedProfile =
-                localStorage.getItem(
-                    "teacherProfile"
-                );
-
-
-            if (!savedProfile) {
-                return;
-            }
-
+        try {
 
             const profile =
                 JSON.parse(savedProfile);
 
+            document.getElementById("teacherName").value =
+                profile.name || "";
 
-            if (profile.name) {
+            document.getElementById("teacherDob").value =
+                profile.dob || "";
 
-                document.getElementById(
-                    "teacherName"
-                ).value =
-                    profile.name;
-            }
+            document.getElementById("teacherEmail").value =
+                profile.email || "";
 
+            document.getElementById("teacherPhone").value =
+                profile.phone || "";
 
-            if (profile.dob) {
+            document.getElementById("teacherCountry").value =
+                profile.country || "";
 
-                document.getElementById(
-                    "teacherDob"
-                ).value =
-                    profile.dob;
-            }
+            document.getElementById("teacherLanguage").value =
+                profile.language || "English";
 
+            document.getElementById("qualification").value =
+                profile.qualification || "";
 
-            if (profile.email) {
+            document.getElementById("experience").value =
+                profile.experience || "";
 
-                document.getElementById(
-                    "teacherEmail"
-                ).value =
-                    profile.email;
-            }
+            document.getElementById("teacherAbout").value =
+                profile.about || "";
 
+        } catch (error) {
 
-            if (profile.phone) {
-
-                document.getElementById(
-                    "teacherPhone"
-                ).value =
-                    profile.phone;
-            }
-
-
-            if (profile.country) {
-
-                document.getElementById(
-                    "teacherCountry"
-                ).value =
-                    profile.country;
-            }
-
-
-            if (profile.language) {
-
-                document.getElementById(
-                    "teacherLanguage"
-                ).value =
-                    profile.language;
-            }
-
-
-            if (profile.qualification) {
-
-                document.getElementById(
-                    "qualification"
-                ).value =
-                    profile.qualification;
-            }
-
-
-            if (profile.experience) {
-
-                document.getElementById(
-                    "experience"
-                ).value =
-                    profile.experience;
-            }
-
-
-            if (profile.about) {
-
-                document.getElementById(
-                    "teacherAbout"
-                ).value =
-                    profile.about;
-            }
+            console.log("Teacher profile could not be loaded.");
 
         }
-    );
+
+    }
+
+
+    renderSchedules();
+
+});
 
 </script>
 
