@@ -3,8 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>Student Dashboard - Learn Hub Quran</title>
+<title>Learn Hub Quran - Student Dashboard</title>
 
 <style>
 * {
@@ -14,18 +13,18 @@
 body {
     margin: 0;
     font-family: Arial, sans-serif;
-    background: #f5f8f5;
+    background: #f4f7fb;
     color: #222;
 }
 
 header {
-    background: #0b6b3a;
+    background: #173f5f;
     color: white;
-    padding: 15px;
+    padding: 15px 20px;
     display: flex;
-    flex-wrap: wrap;
     justify-content: space-between;
     align-items: center;
+    flex-wrap: wrap;
 }
 
 .logo {
@@ -33,15 +32,21 @@ header {
     font-weight: bold;
 }
 
+nav {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
 nav a {
     color: white;
     text-decoration: none;
-    margin: 5px 8px;
-    display: inline-block;
+    padding: 8px 12px;
+    border-radius: 5px;
 }
 
 nav a:hover {
-    text-decoration: underline;
+    background: rgba(255,255,255,0.15);
 }
 
 .language-box select {
@@ -51,7 +56,7 @@ nav a:hover {
 }
 
 .hero {
-    background: #0b6b3a;
+    background: #20639b;
     color: white;
     text-align: center;
     padding: 35px 15px;
@@ -62,34 +67,54 @@ nav a:hover {
 }
 
 .container {
-    max-width: 1100px;
-    margin: auto;
-    padding: 20px;
+    width: 94%;
+    max-width: 1200px;
+    margin: 25px auto;
 }
 
-.card {
+.section {
     background: white;
-    padding: 20px;
-    margin-bottom: 20px;
+    padding: 22px;
+    margin-bottom: 25px;
     border-radius: 10px;
     box-shadow: 0 2px 8px rgba(0,0,0,0.08);
 }
 
-.card h2 {
-    color: #0b6b3a;
+.section h2 {
     margin-top: 0;
+    color: #173f5f;
 }
 
-.form-grid {
+.grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
     gap: 15px;
 }
 
+.card {
+    background: #f8fafc;
+    border: 1px solid #ddd;
+    padding: 18px;
+    border-radius: 8px;
+}
+
+.program-card {
+    text-align: center;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 18px;
+    background: white;
+}
+
+.program-card h3 {
+    color: #20639b;
+}
+
 label {
-    font-weight: bold;
     display: block;
+    margin-top: 12px;
     margin-bottom: 5px;
+    font-weight: bold;
 }
 
 input,
@@ -99,6 +124,7 @@ textarea {
     padding: 10px;
     border: 1px solid #ccc;
     border-radius: 6px;
+    font-size: 15px;
 }
 
 textarea {
@@ -107,133 +133,149 @@ textarea {
 }
 
 button {
-    background: #0b6b3a;
+    background: #20639b;
     color: white;
     border: none;
-    padding: 10px 18px;
+    padding: 10px 16px;
     border-radius: 6px;
     cursor: pointer;
-    font-size: 15px;
+    margin-top: 15px;
 }
 
 button:hover {
-    background: #084f2b;
+    background: #173f5f;
 }
 
-.gold-button {
-    background: #c99616;
+button.delete {
+    background: #c0392b;
 }
 
-.gold-button:hover {
-    background: #a8790e;
+button.secondary {
+    background: #7f8c8d;
 }
 
-.program-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-    gap: 15px;
+button.success {
+    background: #27ae60;
 }
 
-.program {
-    background: #eef7f0;
-    padding: 20px;
-    border-radius: 8px;
-    text-align: center;
-    cursor: pointer;
-    border: 2px solid transparent;
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
 }
 
-.program:hover {
-    border-color: #0b6b3a;
+th,
+td {
+    border: 1px solid #ddd;
+    padding: 10px;
+    text-align: left;
 }
 
-.program.active {
-    border-color: #c99616;
-    background: #fff8df;
+th {
+    background: #173f5f;
+    color: white;
 }
 
 .table-wrapper {
     overflow-x: auto;
 }
 
-table {
-    width: 100%;
-    border-collapse: collapse;
-    min-width: 850px;
+.status {
+    display: inline-block;
+    padding: 6px 10px;
+    border-radius: 5px;
+    font-size: 13px;
+    font-weight: bold;
 }
 
-th,
-td {
-    padding: 12px;
-    border: 1px solid #ddd;
-    text-align: center;
+.status.available {
+    background: #d4edda;
+    color: #155724;
 }
 
-th {
-    background: #0b6b3a;
-    color: white;
+.status.booked {
+    background: #fff3cd;
+    color: #856404;
 }
 
-.join-button {
-    background: #c99616;
-    padding: 7px 12px;
+.status.pending {
+    background: #fff3cd;
+    color: #856404;
 }
 
-.join-button:hover {
-    background: #a8790e;
+.status.completed {
+    background: #d4edda;
+    color: #155724;
 }
 
-.empty-message {
-    text-align: center;
-    padding: 20px;
-    color: #666;
+.status.unpaid {
+    background: #f8d7da;
+    color: #721c24;
 }
 
-.homework {
-    border-left: 4px solid #0b6b3a;
-    padding: 12px;
-    margin-bottom: 10px;
-    background: #f7f7f7;
+.status.paid {
+    background: #d4edda;
+    color: #155724;
 }
 
-.chat-area {
-    background: #f7f7f7;
+.notice {
+    background: #eef6ff;
+    border-left: 5px solid #20639b;
     padding: 15px;
-    min-height: 150px;
-    margin-bottom: 10px;
-    border-radius: 8px;
+    margin-bottom: 15px;
 }
 
-.chat-message {
-    background: white;
+.message {
     padding: 10px;
-    margin-bottom: 8px;
-    border-radius: 6px;
+    margin: 8px 0;
+    border-radius: 8px;
+    max-width: 80%;
+}
+
+.teacher-message {
+    background: #dff0ff;
+}
+
+.student-message {
+    background: #eeeeee;
+    margin-left: auto;
+}
+
+.stat {
+    text-align: center;
+}
+
+.stat h3 {
+    font-size: 28px;
+    color: #20639b;
+    margin: 5px 0;
 }
 
 .fee-box {
-    background: #eef7f0;
-    padding: 15px;
-    border-radius: 8px;
-    margin-bottom: 10px;
+    text-align: center;
+    padding: 25px;
+    background: #f8fafc;
+    border: 1px solid #ddd;
+    border-radius: 10px;
 }
 
 footer {
-    background: #0b6b3a;
+    background: #173f5f;
     color: white;
     text-align: center;
-    padding: 20px;
+    padding: 25px;
     margin-top: 30px;
 }
 
-@media (max-width: 600px) {
+@media (max-width: 700px) {
+
     header {
         flex-direction: column;
-        gap: 10px;
+        gap: 12px;
     }
 
-    nav {
-        text-align: center;
+    table {
+        min-width: 900px;
     }
 }
 </style>
@@ -249,14 +291,13 @@ footer {
 
     <nav>
         <a href="index.html">Home</a>
-        <a href="student.html">Student Dashboard</a>
-        <a href="teacher.html">Teacher Dashboard</a>
+        <a href="student.html">Student</a>
+        <a href="teacher.html">Teacher</a>
         <a href="live-classes.html">Live Classes</a>
     </nav>
 
     <div class="language-box">
-
-        <select id="studentLanguageTop" onchange="changeLanguage()">
+        <select id="languageSelect" onchange="selectLanguage()">
 
             <option value="English">English</option>
             <option value="Urdu">Urdu</option>
@@ -290,7 +331,6 @@ footer {
             <option value="Swahili">Swahili</option>
 
         </select>
-
     </div>
 
 </header>
@@ -301,7 +341,7 @@ footer {
     <h1>Student Dashboard</h1>
 
     <p>
-        Learn Quran online with qualified teachers.
+        Learn Quran, join classes, complete homework and track your progress.
     </p>
 
 </section>
@@ -310,389 +350,512 @@ footer {
 <div class="container">
 
 
-    <!-- Student Profile -->
+<!-- STUDENT ACCOUNT -->
 
-    <div class="card">
+<section class="section">
 
-        <h2>Student Profile</h2>
+    <h2>Student Account</h2>
 
-        <div class="form-grid">
+    <div class="notice">
 
-            <div>
-
-                <label>Student Name</label>
-
-                <input
-                    type="text"
-                    id="studentName"
-                >
-
-            </div>
-
-
-            <div>
-
-                <label>Date of Birth</label>
-
-                <input
-                    type="date"
-                    id="studentDob"
-                >
-
-            </div>
-
-
-            <div>
-
-                <label>Email</label>
-
-                <input
-                    type="email"
-                    id="studentEmail"
-                >
-
-            </div>
-
-
-            <div>
-
-                <label>Phone</label>
-
-                <input
-                    type="tel"
-                    id="studentPhone"
-                >
-
-            </div>
-
-
-            <div>
-
-                <label>Country</label>
-
-                <input
-                    type="text"
-                    id="studentCountry"
-                >
-
-            </div>
-
-
-            <div>
-
-                <label>Language</label>
-
-                <select id="studentLanguage">
-
-                    <option value="English">English</option>
-                    <option value="Urdu">Urdu</option>
-                    <option value="Arabic">Arabic</option>
-                    <option value="Hindi">Hindi</option>
-                    <option value="Bengali">Bengali</option>
-                    <option value="Persian">Persian</option>
-                    <option value="Turkish">Turkish</option>
-                    <option value="Indonesian">Indonesian</option>
-                    <option value="Malay">Malay</option>
-                    <option value="French">French</option>
-                    <option value="Spanish">Spanish</option>
-                    <option value="German">German</option>
-                    <option value="Italian">Italian</option>
-                    <option value="Portuguese">Portuguese</option>
-                    <option value="Russian">Russian</option>
-                    <option value="Chinese">Chinese</option>
-                    <option value="Japanese">Japanese</option>
-                    <option value="Korean">Korean</option>
-                    <option value="Thai">Thai</option>
-                    <option value="Vietnamese">Vietnamese</option>
-                    <option value="Tamil">Tamil</option>
-                    <option value="Telugu">Telugu</option>
-                    <option value="Malayalam">Malayalam</option>
-                    <option value="Kannada">Kannada</option>
-                    <option value="Marathi">Marathi</option>
-                    <option value="Gujarati">Gujarati</option>
-                    <option value="Punjabi">Punjabi</option>
-                    <option value="Dutch">Dutch</option>
-                    <option value="Greek">Greek</option>
-                    <option value="Swahili">Swahili</option>
-
-                </select>
-
-            </div>
-
-        </div>
-
-        <br>
-
-        <button onclick="saveStudentProfile()">
-            Save Student Profile
-        </button>
+        Your Student ID is created automatically when you create your account.
 
     </div>
 
+    <div class="grid">
 
-    <!-- Quran Programs -->
+        <div>
 
-    <div class="card">
+            <label>Email</label>
 
-        <h2>Quran Programs</h2>
-
-        <div class="program-grid">
-
-            <div
-                class="program"
-                onclick="selectProgram(this, 'Reading Quran')"
+            <input
+                type="email"
+                id="accountEmail"
+                placeholder="Enter your email"
             >
-                <h3>Reading Quran</h3>
-                <p>Learn Quran reading.</p>
-            </div>
 
+            <label>Password</label>
 
-            <div
-                class="program"
-                onclick="selectProgram(this, 'Hifz-e-Jadeed')"
+            <input
+                type="password"
+                id="accountPassword"
+                placeholder="Create a password"
             >
-                <h3>Hifz-e-Jadeed</h3>
-                <p>New Quran memorization.</p>
-            </div>
+
+            <button onclick="createStudentAccount()">
+                Create Student Account
+            </button>
+
+        </div>
 
 
-            <div
-                class="program"
-                onclick="selectProgram(this, 'Mushq Quran')"
-            >
-                <h3>Mushq Quran</h3>
-                <p>Quran practice.</p>
-            </div>
+        <div class="card">
 
+            <h3>Your Student ID</h3>
 
-            <div
-                class="program"
-                onclick="selectProgram(this, 'Hadar Quran')"
-            >
-                <h3>Hadar Quran</h3>
-                <p>Fast Quran recitation.</p>
-            </div>
+            <h2 id="studentID">
+                Not Created
+            </h2>
+
+            <p>
+                Keep this ID for your account.
+            </p>
 
         </div>
 
     </div>
 
+</section>
 
-    <!-- Student Overview -->
 
-    <div class="card">
+<!-- PROFILE -->
 
-        <h2>Student Overview</h2>
+<section class="section">
+
+    <h2>Student Profile</h2>
+
+    <div class="grid">
+
+        <div>
+
+            <label>Full Name</label>
+
+            <input
+                type="text"
+                id="studentName"
+                placeholder="Enter full name"
+            >
+
+            <label>Date of Birth</label>
+
+            <input
+                type="date"
+                id="studentDOB"
+            >
+
+            <label>Email</label>
+
+            <input
+                type="email"
+                id="studentEmail"
+                placeholder="Enter email"
+            >
+
+            <label>Phone</label>
+
+            <input
+                type="tel"
+                id="studentPhone"
+                placeholder="Enter phone number"
+            >
+
+        </div>
+
+
+        <div>
+
+            <label>Country</label>
+
+            <input
+                type="text"
+                id="studentCountry"
+                placeholder="Enter country"
+            >
+
+            <label>Preferred Language</label>
+
+            <select id="preferredLanguage">
+
+                <option>English</option>
+                <option>Urdu</option>
+                <option>Arabic</option>
+                <option>Hindi</option>
+                <option>Bengali</option>
+                <option>Persian</option>
+                <option>Turkish</option>
+                <option>Indonesian</option>
+                <option>Malay</option>
+                <option>French</option>
+                <option>Spanish</option>
+                <option>German</option>
+                <option>Italian</option>
+                <option>Portuguese</option>
+                <option>Russian</option>
+                <option>Chinese</option>
+                <option>Japanese</option>
+                <option>Korean</option>
+                <option>Thai</option>
+                <option>Vietnamese</option>
+                <option>Tamil</option>
+                <option>Telugu</option>
+                <option>Malayalam</option>
+                <option>Kannada</option>
+                <option>Marathi</option>
+                <option>Gujarati</option>
+                <option>Punjabi</option>
+                <option>Dutch</option>
+                <option>Greek</option>
+                <option>Swahili</option>
+
+            </select>
+
+            <label>Parent / Guardian Name</label>
+
+            <input
+                type="text"
+                id="guardianName"
+                placeholder="Enter parent or guardian name"
+            >
+
+            <label>Parent / Guardian Phone</label>
+
+            <input
+                type="tel"
+                id="guardianPhone"
+                placeholder="Enter parent or guardian phone"
+            >
+
+        </div>
+
+    </div>
+
+    <button onclick="saveStudentProfile()">
+        Save Student Profile
+    </button>
+
+</section>
+
+
+<!-- PROGRAMS -->
+
+<section class="section">
+
+    <h2>Learning Programs</h2>
+
+    <div class="grid">
+
+        <div class="program-card">
+
+            <h3>Recitation</h3>
+
+            <p>
+                Quran reading and recitation.
+            </p>
+
+            <button onclick="selectProgram('Recitation')">
+                Select
+            </button>
+
+        </div>
+
+
+        <div class="program-card">
+
+            <h3>Hifz</h3>
+
+            <p>
+                Quran memorization.
+            </p>
+
+            <button onclick="selectProgram('Hifz')">
+                Select
+            </button>
+
+        </div>
+
+
+        <div class="program-card">
+
+            <h3>Tajweed</h3>
+
+            <p>
+                Tajweed rules and correct pronunciation.
+            </p>
+
+            <button onclick="selectProgram('Tajweed')">
+                Select
+            </button>
+
+        </div>
+
+
+        <div class="program-card">
+
+            <h3>Arabic Language</h3>
+
+            <p>
+                Arabic language learning.
+            </p>
+
+            <button onclick="selectProgram('Arabic Language')">
+                Select
+            </button>
+
+        </div>
+
+
+        <div class="program-card">
+
+            <h3>English Language</h3>
+
+            <p>
+                English language learning.
+            </p>
+
+            <button onclick="selectProgram('English Language')">
+                Select
+            </button>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- LEARNING OVERVIEW -->
+
+<section class="section">
+
+    <h2>Learning Overview</h2>
+
+    <div class="grid">
+
+        <div class="card stat">
+
+            <p>Current Program</p>
+
+            <h3 id="currentProgram">
+                Not Selected
+            </h3>
+
+        </div>
+
+
+        <div class="card stat">
+
+            <p>Assigned Teacher</p>
+
+            <h3 id="assignedTeacher">
+                Not Assigned
+            </h3>
+
+        </div>
+
+
+        <div class="card stat">
+
+            <p>Next Class</p>
+
+            <h3 id="nextClass">
+                No Class
+            </h3>
+
+        </div>
+
+
+        <div class="card stat">
+
+            <p>Homework</p>
+
+            <h3 id="homeworkCount">
+                0
+            </h3>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- CLASS SCHEDULE -->
+
+<section class="section">
+
+    <h2>Live Class Schedule</h2>
+
+    <div class="notice">
+
+        Teacher-created schedules will appear here automatically.
+
+    </div>
+
+    <div class="table-wrapper">
+
+        <table>
+
+            <thead>
+
+                <tr>
+
+                    <th>Day</th>
+                    <th>Teacher</th>
+                    <th>Program</th>
+                    <th>Start Time</th>
+                    <th>End Time</th>
+                    <th>Language</th>
+                    <th>Capacity</th>
+                    <th>Status</th>
+                    <th>Action</th>
+
+                </tr>
+
+            </thead>
+
+            <tbody id="scheduleTableBody">
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+</section>
+
+
+<!-- HOMEWORK -->
+
+<section class="section">
+
+    <h2>Homework & Assignments</h2>
+
+    <div id="homeworkList">
+
+    </div>
+
+</section>
+
+
+<!-- PROGRESS -->
+
+<section class="section">
+
+    <h2>Student Progress</h2>
+
+    <div class="grid">
+
+        <div class="card stat">
+
+            <p>Classes Completed</p>
+
+            <h3 id="completedClasses">
+                0
+            </h3>
+
+        </div>
+
+
+        <div class="card stat">
+
+            <p>Assignments Completed</p>
+
+            <h3 id="completedAssignments">
+                0
+            </h3>
+
+        </div>
+
+
+        <div class="card stat">
+
+            <p>Learning Status</p>
+
+            <h3 id="learningStatus">
+                Active
+            </h3>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- COMMUNICATION -->
+
+<section class="section">
+
+    <h2>Teacher Communication</h2>
+
+    <div id="studentChat">
+
+        <div class="message teacher-message">
+            Welcome to Learn Hub Quran.
+        </div>
+
+    </div>
+
+
+    <label>Message</label>
+
+    <textarea
+        id="studentMessage"
+        placeholder="Write your message"
+    ></textarea>
+
+    <button onclick="sendStudentMessage()">
+        Send Message
+    </button>
+
+</section>
+
+
+<!-- FEES -->
+
+<section class="section">
+
+    <h2>Student Fees</h2>
+
+    <div class="fee-box">
+
+        <h3>Student Admission</h3>
+
+        <h2>FREE</h2>
 
         <p>
-            <strong>Current Program:</strong>
-            <span id="currentProgram">
-                Not selected
+            There is no student admission fee.
+        </p>
+
+        <hr>
+
+        <h3>Learning Fee</h3>
+
+        <p>
+            Learning fees depend on the selected program and class arrangement.
+        </p>
+
+        <p id="paymentStatus">
+
+            <span class="status unpaid">
+                Payment Not Recorded
             </span>
+
         </p>
 
-        <p>
-            <strong>Assigned Teacher:</strong>
-            Quran Teacher
-        </p>
-
-        <p>
-            <strong>Next Class:</strong>
-            See My Live Classes below.
-        </p>
-
-    </div>
-
-
-    <!-- Live Classes -->
-
-    <div class="card">
-
-        <h2>My Live Classes</h2>
-
-        <p>
-            These class schedules are created by your Quran teacher.
-        </p>
-
-        <div class="table-wrapper">
-
-            <table>
-
-                <thead>
-
-                    <tr>
-
-                        <th>Day</th>
-                        <th>Teacher</th>
-                        <th>Program</th>
-                        <th>Start Time</th>
-                        <th>End Time</th>
-                        <th>Language</th>
-                        <th>Capacity</th>
-                        <th>Status</th>
-                        <th>Action</th>
-
-                    </tr>
-
-                </thead>
-
-
-                <tbody id="studentScheduleBody">
-
-                </tbody>
-
-            </table>
-
-        </div>
-
-
-        <p
-            id="studentScheduleEmpty"
-            class="empty-message"
-        >
-            No class schedule available yet.
-        </p>
-
-    </div>
-
-
-    <!-- Homework -->
-
-    <div class="card">
-
-        <h2>Homework & Assignments</h2>
-
-        <div class="homework">
-
-            <strong>Daily Quran Reading</strong>
-
-            <p>
-                Practice Quran reading according to your teacher's lesson.
-            </p>
-
-            <button onclick="markHomework('Daily Quran Reading')">
-                Mark Complete
-            </button>
-
-        </div>
-
-
-        <div class="homework">
-
-            <strong>Surah Memorization</strong>
-
-            <p>
-                Revise the assigned Surah.
-            </p>
-
-            <button onclick="markHomework('Surah Memorization')">
-                Mark Complete
-            </button>
-
-        </div>
-
-
-        <div class="homework">
-
-            <strong>Quran Practice</strong>
-
-            <p>
-                Complete your daily Quran practice.
-            </p>
-
-            <button onclick="markHomework('Quran Practice')">
-                Mark Complete
-            </button>
-
-        </div>
-
-    </div>
-
-
-    <!-- Teacher Communication -->
-
-    <div class="card">
-
-        <h2>Teacher Communication</h2>
-
-        <div
-            id="chatArea"
-            class="chat-area"
-        >
-
-            <div class="chat-message">
-
-                <strong>System:</strong>
-
-                Teacher communication area is ready.
-
-            </div>
-
-        </div>
-
-
-        <input
-            type="text"
-            id="chatInput"
-            placeholder="Write a message"
-        >
-
-        <br><br>
-
-        <button onclick="sendMessage()">
-            Send Message
+        <button onclick="viewPaymentOptions()">
+            View Payment Options
         </button>
 
     </div>
 
-
-    <!-- Student Fees -->
-
-    <div class="card">
-
-        <h2>Student Fees</h2>
-
-        <div class="fee-box">
-
-            <strong>Admission Fee:</strong>
-
-            <p>
-                No Student Admission Fee
-            </p>
-
-        </div>
+</section>
 
 
-        <div class="fee-box">
+<!-- ACCOUNT STATUS -->
 
-            <strong>Learning Fee:</strong>
+<section class="section">
 
-            <p>
-                According to Program
-            </p>
+    <h2>Account Status</h2>
 
-        </div>
+    <div id="accountStatusBox" class="notice">
 
-
-        <div class="fee-box">
-
-            <strong>Payment Status:</strong>
-
-            <p>
-                Not Paid
-            </p>
-
-        </div>
-
-
-        <button
-            class="gold-button"
-            onclick="paymentMessage()"
-        >
-            Payment Information
-        </button>
+        Student account has not been created yet.
 
     </div>
+
+</section>
+
 
 </div>
 
@@ -702,7 +865,7 @@ footer {
     <p>Learn Hub Quran</p>
 
     <p>
-        Quran Education for Students Worldwide
+        Contact: Sjan70985@gmail.com | 03255411647
     </p>
 
 </footer>
@@ -710,93 +873,217 @@ footer {
 
 <script>
 
-const SCHEDULE_KEY = "learnHubQuranSchedules";
+const STUDENT_ACCOUNT_KEY =
+    "learnHubQuranStudentAccount";
 
-const STUDENT_PROFILE_KEY = "studentProfile";
+const STUDENT_PROFILE_KEY =
+    "learnHubQuranStudentProfile";
+
+const SCHEDULE_KEY =
+    "learnHubQuranSchedules";
+
+const STUDENT_PROGRAM_KEY =
+    "learnHubQuranStudentProgram";
+
+const ASSIGNMENT_KEY =
+    "learnHubQuranTeacherAssignments";
+
+const COMPLETED_ASSIGNMENTS_KEY =
+    "learnHubQuranCompletedAssignments";
+
+const COMPLETED_CLASSES_KEY =
+    "learnHubQuranCompletedClasses";
 
 
-function changeLanguage() {
+function escapeHTML(value) {
+
+    return String(value || "")
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
+
+}
+
+
+/* LANGUAGE */
+
+function selectLanguage() {
 
     const language =
-        document.getElementById(
-            "studentLanguageTop"
-        ).value;
+        document.getElementById("languageSelect").value;
 
     localStorage.setItem(
         "studentLanguage",
         language
     );
+
 }
 
+
+/* CREATE STUDENT ACCOUNT */
+
+function createStudentAccount() {
+
+    const email =
+        document.getElementById("accountEmail").value.trim();
+
+    const password =
+        document.getElementById("accountPassword").value.trim();
+
+
+    if (!email || !password) {
+
+        alert("Please enter email and password.");
+
+        return;
+
+    }
+
+
+    let existingAccount =
+        JSON.parse(
+            localStorage.getItem(STUDENT_ACCOUNT_KEY) || "null"
+        );
+
+
+    if (existingAccount) {
+
+        alert(
+            "A student account already exists on this device."
+        );
+
+        return;
+
+    }
+
+
+    const studentID =
+        generateStudentID();
+
+
+    const account = {
+
+        id: studentID,
+
+        email: email,
+
+        password: password,
+
+        role: "Student",
+
+        status: "Active",
+
+        createdAt:
+            new Date().toISOString()
+
+    };
+
+
+    localStorage.setItem(
+        STUDENT_ACCOUNT_KEY,
+        JSON.stringify(account)
+    );
+
+
+    document.getElementById("studentID").textContent =
+        studentID;
+
+
+    updateAccountStatus();
+
+
+    alert(
+        "Student account created successfully. Your Student ID is " +
+        studentID
+    );
+
+}
+
+
+/* GENERATE STUDENT ID */
+
+function generateStudentID() {
+
+    let counter =
+        Number(
+            localStorage.getItem(
+                "learnHubQuranStudentCounter"
+            ) || "0"
+        );
+
+
+    counter++;
+
+
+    localStorage.setItem(
+        "learnHubQuranStudentCounter",
+        counter
+    );
+
+
+    return "STU-" +
+        String(counter).padStart(6, "0");
+
+}
+
+
+/* SAVE PROFILE */
 
 function saveStudentProfile() {
 
     const profile = {
 
         name:
-            document.getElementById(
-                "studentName"
-            ).value,
+            document.getElementById("studentName").value.trim(),
 
         dob:
-            document.getElementById(
-                "studentDob"
-            ).value,
+            document.getElementById("studentDOB").value,
 
         email:
-            document.getElementById(
-                "studentEmail"
-            ).value,
+            document.getElementById("studentEmail").value.trim(),
 
         phone:
-            document.getElementById(
-                "studentPhone"
-            ).value,
+            document.getElementById("studentPhone").value.trim(),
 
         country:
-            document.getElementById(
-                "studentCountry"
-            ).value,
+            document.getElementById("studentCountry").value.trim(),
 
         language:
-            document.getElementById(
-                "studentLanguage"
-            ).value
+            document.getElementById("preferredLanguage").value,
+
+        guardianName:
+            document.getElementById("guardianName").value.trim(),
+
+        guardianPhone:
+            document.getElementById("guardianPhone").value.trim()
 
     };
 
 
     localStorage.setItem(
-
         STUDENT_PROFILE_KEY,
-
         JSON.stringify(profile)
-
     );
+
+
+    renderSchedules();
 
 
     alert(
         "Student profile saved successfully."
     );
+
 }
 
 
-function selectProgram(element, program) {
+/* SELECT PROGRAM */
 
-    document.querySelectorAll(
-        ".program"
-    ).forEach(function(item) {
-
-        item.classList.remove("active");
-
-    });
-
-
-    element.classList.add("active");
-
+function selectProgram(program) {
 
     localStorage.setItem(
-        "selectedProgram",
+        STUDENT_PROGRAM_KEY,
         program
     );
 
@@ -804,164 +1091,431 @@ function selectProgram(element, program) {
     document.getElementById(
         "currentProgram"
     ).textContent = program;
+
+
+    alert(
+        program + " has been selected."
+    );
+
+
+    renderSchedules();
+
 }
 
 
-function getSchedules() {
+/* LOAD SCHEDULES */
 
-    const savedSchedules =
-        localStorage.getItem(
-            SCHEDULE_KEY
-        );
+function renderSchedules() {
 
-
-    if (!savedSchedules) {
-
-        return [];
-
-    }
-
-
-    try {
-
-        return JSON.parse(
-            savedSchedules
-        );
-
-    } catch (error) {
-
-        return [];
-
-    }
-}
-
-
-function renderStudentSchedules() {
-
-    const scheduleBody =
+    const tableBody =
         document.getElementById(
-            "studentScheduleBody"
-        );
-
-
-    const emptyMessage =
-        document.getElementById(
-            "studentScheduleEmpty"
+            "scheduleTableBody"
         );
 
 
     const schedules =
-        getSchedules();
+        JSON.parse(
+            localStorage.getItem(
+                SCHEDULE_KEY
+            ) || "[]"
+        );
 
 
-    scheduleBody.innerHTML = "";
+    const selectedProgram =
+        localStorage.getItem(
+            STUDENT_PROGRAM_KEY
+        );
 
 
-    if (schedules.length === 0) {
+    tableBody.innerHTML = "";
 
-        emptyMessage.style.display =
-            "block";
+
+    let visibleSchedules =
+        schedules;
+
+
+    if (selectedProgram) {
+
+        const matchingSchedules =
+            schedules.filter(
+                schedule =>
+                    schedule.program === selectedProgram
+            );
+
+
+        if (matchingSchedules.length > 0) {
+
+            visibleSchedules =
+                matchingSchedules;
+
+        }
+
+    }
+
+
+    if (visibleSchedules.length === 0) {
+
+        tableBody.innerHTML = `
+
+            <tr>
+
+                <td colspan="9">
+
+                    No class schedule available yet.
+
+                </td>
+
+            </tr>
+
+        `;
+
+
+        document.getElementById(
+            "nextClass"
+        ).textContent = "No Class";
+
+
+        document.getElementById(
+            "assignedTeacher"
+        ).textContent = "Not Assigned";
+
 
         return;
 
     }
 
 
-    emptyMessage.style.display =
-        "none";
+    visibleSchedules.forEach(
+        schedule => {
+
+            const row =
+                document.createElement("tr");
 
 
-    schedules.forEach(function(schedule) {
-
-        const row =
-            document.createElement("tr");
+            const link =
+                schedule.liveClassLink;
 
 
-        row.innerHTML = `
-
-            <td>
-                ${escapeHTML(schedule.day)}
-            </td>
-
-            <td>
-                ${escapeHTML(schedule.teacherName || "Quran Teacher")}
-            </td>
-
-            <td>
-                ${escapeHTML(schedule.program)}
-            </td>
-
-            <td>
-                ${escapeHTML(schedule.start)}
-            </td>
-
-            <td>
-                ${escapeHTML(schedule.end)}
-            </td>
-
-            <td>
-                ${escapeHTML(schedule.language)}
-            </td>
-
-            <td>
-                ${escapeHTML(String(schedule.capacity))}
-            </td>
-
-            <td>
-                Available
-            </td>
-
-            <td>
-
-                <button
-                    class="join-button"
-                    onclick="joinClass()"
-                >
-                    Join
-                </button>
-
-            </td>
-
-        `;
+            let actionHTML;
 
 
-        scheduleBody.appendChild(row);
+            if (link) {
 
-    });
+                actionHTML = `
 
-}
+                    <button
+                        class="success"
+                        onclick="joinClass('${escapeHTML(link)}')"
+                    >
+                        Join
+                    </button>
+
+                `;
+
+            } else {
+
+                actionHTML = `
+
+                    <button
+                        onclick="joinClass('')"
+                    >
+                        Join
+                    </button>
+
+                `;
+
+            }
 
 
-function joinClass() {
+            row.innerHTML = `
 
-    alert(
-        "The live classroom will open after the live class system is connected."
+                <td>
+                    ${escapeHTML(schedule.day)}
+                </td>
+
+                <td>
+                    ${escapeHTML(
+                        schedule.teacher ||
+                        "Quran Teacher"
+                    )}
+                </td>
+
+                <td>
+                    ${escapeHTML(schedule.program)}
+                </td>
+
+                <td>
+                    ${escapeHTML(schedule.startTime)}
+                </td>
+
+                <td>
+                    ${escapeHTML(schedule.endTime)}
+                </td>
+
+                <td>
+                    ${escapeHTML(schedule.language)}
+                </td>
+
+                <td>
+                    ${escapeHTML(schedule.capacity)}
+                </td>
+
+                <td>
+
+                    <span class="status available">
+                        ${escapeHTML(
+                            schedule.status ||
+                            "Available"
+                        )}
+                    </span>
+
+                </td>
+
+                <td>
+                    ${actionHTML}
+                </td>
+
+            `;
+
+
+            tableBody.appendChild(row);
+
+        }
     );
+
+
+    const firstSchedule =
+        visibleSchedules[0];
+
+
+    document.getElementById(
+        "nextClass"
+    ).textContent =
+        firstSchedule.day +
+        " " +
+        firstSchedule.startTime;
+
+
+    document.getElementById(
+        "assignedTeacher"
+    ).textContent =
+        firstSchedule.teacher ||
+        "Quran Teacher";
+
 }
 
 
-function markHomework(homeworkName) {
+/* JOIN CLASS */
 
-    alert(
-        homeworkName +
-        " marked as completed."
+function joinClass(link) {
+
+    if (!link) {
+
+        alert(
+            "The teacher has not added the live class link yet."
+        );
+
+        return;
+
+    }
+
+
+    window.open(
+        link,
+        "_blank"
     );
+
 }
 
 
-function sendMessage() {
+/* LOAD HOMEWORK */
 
-    const input =
+function renderHomework() {
+
+    const list =
         document.getElementById(
-            "chatInput"
+            "homeworkList"
         );
 
 
+    const assignments =
+        JSON.parse(
+            localStorage.getItem(
+                ASSIGNMENT_KEY
+            ) || "[]"
+        );
+
+
+    const completed =
+        JSON.parse(
+            localStorage.getItem(
+                COMPLETED_ASSIGNMENTS_KEY
+            ) || "[]"
+        );
+
+
+    list.innerHTML = "";
+
+
+    document.getElementById(
+        "homeworkCount"
+    ).textContent =
+        assignments.length;
+
+
+    if (assignments.length === 0) {
+
+        list.innerHTML =
+            "<p>No homework assigned yet.</p>";
+
+        return;
+
+    }
+
+
+    assignments.forEach(
+        assignment => {
+
+            const isCompleted =
+                completed.includes(
+                    assignment.id
+                );
+
+
+            const item =
+                document.createElement("div");
+
+
+            item.className =
+                "card";
+
+
+            item.style.marginBottom =
+                "12px";
+
+
+            item.innerHTML = `
+
+                <h3>
+                    ${escapeHTML(
+                        assignment.title
+                    )}
+                </h3>
+
+                <p>
+                    Student:
+                    ${escapeHTML(
+                        assignment.student
+                    )}
+                </p>
+
+                <p>
+                    Due Date:
+                    ${escapeHTML(
+                        assignment.dueDate
+                    )}
+                </p>
+
+                <p>
+                    ${escapeHTML(
+                        assignment.instructions
+                    )}
+                </p>
+
+                <p>
+
+                    ${
+                        isCompleted
+
+                        ? '<span class="status completed">Completed</span>'
+
+                        : '<span class="status pending">Pending</span>'
+                    }
+
+                </p>
+
+
+                ${
+                    isCompleted
+
+                    ? ""
+
+                    : `
+
+                        <button
+                            class="success"
+                            onclick="markHomework(${assignment.id})"
+                        >
+                            Mark Complete
+                        </button>
+
+                    `
+                }
+
+            `;
+
+
+            list.appendChild(item);
+
+        }
+    );
+
+}
+
+
+/* MARK HOMEWORK */
+
+function markHomework(id) {
+
+    let completed =
+        JSON.parse(
+            localStorage.getItem(
+                COMPLETED_ASSIGNMENTS_KEY
+            ) || "[]"
+        );
+
+
+    if (!completed.includes(id)) {
+
+        completed.push(id);
+
+    }
+
+
+    localStorage.setItem(
+        COMPLETED_ASSIGNMENTS_KEY,
+        JSON.stringify(completed)
+    );
+
+
+    renderHomework();
+
+
+    updateProgress();
+
+
+    alert(
+        "Homework marked as completed."
+    );
+
+}
+
+
+/* COMMUNICATION */
+
+function sendStudentMessage() {
+
     const message =
-        input.value.trim();
+        document.getElementById(
+            "studentMessage"
+        ).value.trim();
 
 
     if (!message) {
+
+        alert(
+            "Please write a message."
+        );
 
         return;
 
@@ -970,65 +1524,146 @@ function sendMessage() {
 
     const chat =
         document.getElementById(
-            "chatArea"
+            "studentChat"
         );
 
 
-    const messageBox =
+    const messageElement =
         document.createElement("div");
 
 
-    messageBox.className =
-        "chat-message";
+    messageElement.className =
+        "message student-message";
 
 
-    messageBox.innerHTML =
-
-        "<strong>Student:</strong> " +
-
-        escapeHTML(message);
+    messageElement.textContent =
+        message;
 
 
     chat.appendChild(
-        messageBox
+        messageElement
     );
 
 
-    input.value = "";
+    document.getElementById(
+        "studentMessage"
+    ).value = "";
 
-}
-
-
-function paymentMessage() {
 
     alert(
-        "Student admission is free. Learning fee depends on the selected Quran program."
+        "Message sent."
     );
 
 }
 
 
-function escapeHTML(value) {
+/* PAYMENT */
 
-    const div =
-        document.createElement(
-            "div"
+function viewPaymentOptions() {
+
+    alert(
+        "Payment options will be connected when the online payment system is added."
+    );
+
+}
+
+
+/* ACCOUNT STATUS */
+
+function updateAccountStatus() {
+
+    const account =
+        JSON.parse(
+            localStorage.getItem(
+                STUDENT_ACCOUNT_KEY
+            ) || "null"
         );
 
 
-    div.textContent =
-        value;
+    const box =
+        document.getElementById(
+            "accountStatusBox"
+        );
 
 
-    return div.innerHTML;
+    if (!account) {
+
+        box.innerHTML =
+            "Student account has not been created yet.";
+
+        return;
+
+    }
+
+
+    document.getElementById(
+        "studentID"
+    ).textContent =
+        account.id;
+
+
+    box.innerHTML = `
+
+        <strong>Student Account:</strong>
+        ${escapeHTML(account.id)}
+
+        <br><br>
+
+        <strong>Role:</strong>
+        Student
+
+        <br><br>
+
+        <strong>Status:</strong>
+
+        <span class="status active">
+            ${escapeHTML(account.status)}
+        </span>
+
+    `;
 
 }
 
+
+/* PROGRESS */
+
+function updateProgress() {
+
+    const completedAssignments =
+        JSON.parse(
+            localStorage.getItem(
+                COMPLETED_ASSIGNMENTS_KEY
+            ) || "[]"
+        );
+
+
+    const completedClasses =
+        Number(
+            localStorage.getItem(
+                COMPLETED_CLASSES_KEY
+            ) || "0"
+        );
+
+
+    document.getElementById(
+        "completedAssignments"
+    ).textContent =
+        completedAssignments.length;
+
+
+    document.getElementById(
+        "completedClasses"
+    ).textContent =
+        completedClasses;
+
+}
+
+
+/* LOAD SAVED DATA */
 
 document.addEventListener(
     "DOMContentLoaded",
     function() {
-
 
         const savedLanguage =
             localStorage.getItem(
@@ -1039,78 +1674,99 @@ document.addEventListener(
         if (savedLanguage) {
 
             document.getElementById(
-                "studentLanguageTop"
+                "languageSelect"
             ).value =
                 savedLanguage;
 
         }
 
 
-        const savedProfile =
-            localStorage.getItem(
-                STUDENT_PROFILE_KEY
+        const account =
+            JSON.parse(
+                localStorage.getItem(
+                    STUDENT_ACCOUNT_KEY
+                ) || "null"
             );
 
 
-        if (savedProfile) {
+        if (account) {
 
-            try {
+            document.getElementById(
+                "accountEmail"
+            ).value =
+                account.email || "";
 
-                const profile =
-                    JSON.parse(
-                        savedProfile
-                    );
+            document.getElementById(
+                "studentID"
+            ).textContent =
+                account.id;
 
-
-                document.getElementById(
-                    "studentName"
-                ).value =
-                    profile.name || "";
-
-
-                document.getElementById(
-                    "studentDob"
-                ).value =
-                    profile.dob || "";
+        }
 
 
-                document.getElementById(
-                    "studentEmail"
-                ).value =
-                    profile.email || "";
+        const profile =
+            JSON.parse(
+                localStorage.getItem(
+                    STUDENT_PROFILE_KEY
+                ) || "null"
+            );
 
 
-                document.getElementById(
-                    "studentPhone"
-                ).value =
-                    profile.phone || "";
+        if (profile) {
+
+            document.getElementById(
+                "studentName"
+            ).value =
+                profile.name || "";
 
 
-                document.getElementById(
-                    "studentCountry"
-                ).value =
-                    profile.country || "";
+            document.getElementById(
+                "studentDOB"
+            ).value =
+                profile.dob || "";
 
 
-                document.getElementById(
-                    "studentLanguage"
-                ).value =
-                    profile.language || "English";
+            document.getElementById(
+                "studentEmail"
+            ).value =
+                profile.email || "";
 
-            } catch (error) {
 
-                console.log(
-                    "Student profile could not be loaded."
-                );
+            document.getElementById(
+                "studentPhone"
+            ).value =
+                profile.phone || "";
 
-            }
+
+            document.getElementById(
+                "studentCountry"
+            ).value =
+                profile.country || "";
+
+
+            document.getElementById(
+                "preferredLanguage"
+            ).value =
+                profile.language || "English";
+
+
+            document.getElementById(
+                "guardianName"
+            ).value =
+                profile.guardianName || "";
+
+
+            document.getElementById(
+                "guardianPhone"
+            ).value =
+                profile.guardianPhone || "";
 
         }
 
 
         const selectedProgram =
             localStorage.getItem(
-                "selectedProgram"
+                STUDENT_PROGRAM_KEY
             );
 
 
@@ -1121,29 +1777,16 @@ document.addEventListener(
             ).textContent =
                 selectedProgram;
 
-
-            document.querySelectorAll(
-                ".program"
-            ).forEach(function(programBox) {
-
-                if (
-                    programBox.textContent.includes(
-                        selectedProgram
-                    )
-                ) {
-
-                    programBox.classList.add(
-                        "active"
-                    );
-
-                }
-
-            });
-
         }
 
 
-        renderStudentSchedules();
+        renderSchedules();
+
+        renderHomework();
+
+        updateProgress();
+
+        updateAccountStatus();
 
     }
 );
