@@ -1,0 +1,2014 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Live Classes - Learn Hub Quran</title>
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background: #f6faf7;
+            color: #1f2937;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        button,
+        input,
+        select {
+            font-family: inherit;
+        }
+
+        header {
+            background: white;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .navbar {
+            max-width: 1200px;
+            min-height: 70px;
+            margin: auto;
+            padding: 0 20px;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            gap: 20px;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: #087443;
+        }
+
+        .logo span {
+            color: #c99c24;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .nav-links a {
+            padding: 9px 12px;
+            border-radius: 7px;
+            font-size: 14px;
+        }
+
+        .nav-links a:hover {
+            background: #087443;
+            color: white;
+        }
+
+        .language-select {
+            padding: 8px;
+            border: 1px solid #d5ddd8;
+            border-radius: 7px;
+            background: white;
+        }
+
+        .hero {
+            background: linear-gradient(
+                135deg,
+                #075e36,
+                #0b8b51
+            );
+
+            color: white;
+            text-align: center;
+
+            padding: 60px 20px;
+        }
+
+        .hero h1 {
+            font-size: 42px;
+            margin-bottom: 12px;
+        }
+
+        .hero p {
+            color: #e7f5ed;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: auto;
+            padding: 45px 20px;
+        }
+
+        .section-title {
+            color: #075e36;
+            font-size: 27px;
+            margin-bottom: 18px;
+        }
+
+        .card {
+            background: white;
+            border: 1px solid #e1e9e4;
+            border-radius: 16px;
+            padding: 25px;
+            margin-bottom: 30px;
+
+            box-shadow:
+                0 4px 15px rgba(0,0,0,0.04);
+        }
+
+        .filter-grid {
+            display: grid;
+            grid-template-columns:
+                repeat(4, 1fr);
+
+            gap: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 7px;
+        }
+
+        .form-group select,
+        .form-group input {
+            width: 100%;
+            padding: 11px;
+
+            border: 1px solid #d5ddd8;
+            border-radius: 7px;
+
+            background: white;
+            outline: none;
+        }
+
+        .form-group select:focus,
+        .form-group input:focus {
+            border-color: #087443;
+        }
+
+        .filter-buttons {
+            margin-top: 18px;
+
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            border: none;
+            border-radius: 8px;
+
+            padding: 12px 20px;
+
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .btn-primary {
+            background: #087443;
+            color: white;
+        }
+
+        .btn-gold {
+            background: #c99c24;
+            color: white;
+        }
+
+        .btn-light {
+            background: #e9f7ef;
+            color: #075e36;
+        }
+
+        .btn-danger {
+            background: #d64545;
+            color: white;
+        }
+
+        .btn:hover {
+            opacity: 0.9;
+        }
+
+        .class-grid {
+            display: grid;
+
+            grid-template-columns:
+                repeat(3, 1fr);
+
+            gap: 20px;
+        }
+
+        .class-card {
+            background: white;
+
+            border: 1px solid #e1e9e4;
+            border-radius: 15px;
+
+            overflow: hidden;
+
+            box-shadow:
+                0 4px 15px rgba(0,0,0,0.05);
+        }
+
+        .class-top {
+            background: #087443;
+            color: white;
+
+            padding: 20px;
+        }
+
+        .class-top h3 {
+            margin-bottom: 7px;
+        }
+
+        .class-top p {
+            font-size: 13px;
+            color: #e6f6ed;
+        }
+
+        .class-body {
+            padding: 20px;
+        }
+
+        .class-info {
+            display: flex;
+
+            justify-content: space-between;
+
+            padding: 9px 0;
+
+            border-bottom:
+                1px solid #edf1ee;
+
+            font-size: 14px;
+        }
+
+        .class-info:last-child {
+            border-bottom: none;
+        }
+
+        .class-info strong {
+            color: #075e36;
+        }
+
+        .teacher {
+            display: flex;
+
+            align-items: center;
+
+            gap: 12px;
+
+            margin-bottom: 15px;
+        }
+
+        .teacher-avatar {
+            width: 48px;
+            height: 48px;
+
+            border-radius: 50%;
+
+            background: #e5f5eb;
+
+            display: flex;
+
+            align-items: center;
+            justify-content: center;
+
+            font-size: 25px;
+        }
+
+        .teacher h4 {
+            color: #075e36;
+        }
+
+        .teacher p {
+            color: #6b7280;
+
+            font-size: 12px;
+        }
+
+        .class-actions {
+            display: flex;
+
+            gap: 8px;
+
+            margin-top: 18px;
+        }
+
+        .class-actions button {
+            flex: 1;
+        }
+
+        .status {
+            display: inline-block;
+
+            padding: 5px 10px;
+
+            border-radius: 15px;
+
+            font-size: 11px;
+
+            font-weight: bold;
+        }
+
+        .live {
+            background: #ffe3e3;
+            color: #c62828;
+        }
+
+        .upcoming {
+            background: #fff3d6;
+            color: #8b6800;
+        }
+
+        .available {
+            background: #e3f6ea;
+            color: #087443;
+        }
+
+        .empty {
+            text-align: center;
+
+            padding: 45px 20px;
+
+            color: #6b7280;
+        }
+
+        .teacher-schedule {
+            display: grid;
+
+            grid-template-columns:
+                repeat(2, 1fr);
+
+            gap: 18px;
+        }
+
+        .schedule-box {
+            background: #f7fbf8;
+
+            border: 1px solid #e0ebe4;
+
+            border-radius: 12px;
+
+            padding: 20px;
+        }
+
+        .schedule-box h3 {
+            color: #075e36;
+
+            margin-bottom: 8px;
+        }
+
+        .schedule-box p {
+            color: #6b7280;
+
+            font-size: 13px;
+
+            margin-bottom: 5px;
+        }
+
+        .notice {
+            background: #fff9e9;
+
+            border-left:
+                4px solid #c99c24;
+
+            padding: 15px;
+
+            border-radius: 8px;
+
+            margin-bottom: 25px;
+        }
+
+        .notice strong {
+            color: #8b6800;
+        }
+
+        footer {
+            background: #10251c;
+
+            color: white;
+
+            text-align: center;
+
+            padding: 35px 20px;
+        }
+
+        footer p {
+            color: #bdc9c2;
+
+            margin-top: 7px;
+
+            font-size: 13px;
+        }
+
+        @media (max-width: 950px) {
+
+            .class-grid {
+                grid-template-columns:
+                    repeat(2, 1fr);
+            }
+
+            .filter-grid {
+                grid-template-columns:
+                    repeat(2, 1fr);
+            }
+
+        }
+
+        @media (max-width: 650px) {
+
+            .navbar {
+                flex-direction: column;
+
+                padding: 15px;
+            }
+
+            .hero h1 {
+                font-size: 32px;
+            }
+
+            .class-grid,
+            .filter-grid,
+            .teacher-schedule {
+                grid-template-columns: 1fr;
+            }
+
+            .class-actions {
+                flex-direction: column;
+            }
+
+        }
+
+    </style>
+</head>
+
+
+<body>
+
+
+<header>
+
+    <div class="navbar">
+
+        <a
+            href="index.html"
+            class="logo">
+
+            Learn
+            <span>Hub Quran</span>
+
+        </a>
+
+
+        <nav class="nav-links">
+
+            <a href="index.html">
+                Home
+            </a>
+
+            <a href="student.html">
+                Student
+            </a>
+
+            <a href="teacher.html">
+                Teacher
+            </a>
+
+            <a href="live-classes.html">
+                Live Classes
+            </a>
+
+
+            <select
+                class="language-select"
+                id="languageSelect"
+                onchange="changeLanguage(this.value)">
+
+                <option>English</option>
+                <option>Urdu</option>
+                <option>Arabic</option>
+                <option>Hindi</option>
+                <option>Bengali</option>
+                <option>Persian</option>
+                <option>Turkish</option>
+                <option>Indonesian</option>
+                <option>Malay</option>
+                <option>French</option>
+                <option>Spanish</option>
+                <option>German</option>
+                <option>Italian</option>
+                <option>Portuguese</option>
+                <option>Russian</option>
+                <option>Chinese</option>
+                <option>Japanese</option>
+                <option>Korean</option>
+                <option>Thai</option>
+                <option>Vietnamese</option>
+                <option>Tamil</option>
+                <option>Telugu</option>
+                <option>Malayalam</option>
+                <option>Kannada</option>
+                <option>Marathi</option>
+                <option>Gujarati</option>
+                <option>Punjabi</option>
+                <option>Dutch</option>
+                <option>Greek</option>
+                <option>Swahili</option>
+
+            </select>
+
+        </nav>
+
+    </div>
+
+</header>
+
+
+<section class="hero">
+
+    <h1>
+        Live Quran Classes
+    </h1>
+
+    <p>
+        Find and join live Quran classes
+        according to your preferred schedule.
+    </p>
+
+</section>
+
+
+<main class="container">
+
+
+    <div class="notice">
+
+        <strong>
+            Live Class Information:
+        </strong>
+
+        Teachers manage their own available
+        days and class times.
+
+    </div>
+
+
+    <h2 class="section-title">
+        Find a Live Class
+    </h2>
+
+
+    <section class="card">
+
+
+        <div class="filter-grid">
+
+
+            <div class="form-group">
+
+                <label>
+                    Select Day
+                </label>
+
+                <select id="filterDay">
+
+                    <option value="all">
+                        All Days
+                    </option>
+
+                    <option>
+                        Monday
+                    </option>
+
+                    <option>
+                        Tuesday
+                    </option>
+
+                    <option>
+                        Wednesday
+                    </option>
+
+                    <option>
+                        Thursday
+                    </option>
+
+                    <option>
+                        Friday
+                    </option>
+
+                    <option>
+                        Saturday
+                    </option>
+
+                    <option>
+                        Sunday
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>
+                    Quran Program
+                </label>
+
+                <select id="filterProgram">
+
+                    <option value="all">
+                        All Programs
+                    </option>
+
+                    <option>
+                        Reading Quran
+                    </option>
+
+                    <option>
+                        Hifz-e-Jadeed
+                    </option>
+
+                    <option>
+                        Mushq Quran
+                    </option>
+
+                    <option>
+                        Hadar Quran
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>
+                    Language
+                </label>
+
+                <select id="filterLanguage">
+
+                    <option value="all">
+                        All Languages
+                    </option>
+
+                    <option>English</option>
+                    <option>Urdu</option>
+                    <option>Arabic</option>
+                    <option>Hindi</option>
+                    <option>Bengali</option>
+                    <option>Persian</option>
+                    <option>Turkish</option>
+                    <option>Indonesian</option>
+                    <option>Malay</option>
+                    <option>French</option>
+                    <option>Spanish</option>
+                    <option>German</option>
+                    <option>Italian</option>
+                    <option>Portuguese</option>
+                    <option>Russian</option>
+                    <option>Chinese</option>
+                    <option>Japanese</option>
+                    <option>Korean</option>
+                    <option>Thai</option>
+                    <option>Vietnamese</option>
+                    <option>Tamil</option>
+                    <option>Telugu</option>
+                    <option>Malayalam</option>
+                    <option>Kannada</option>
+                    <option>Marathi</option>
+                    <option>Gujarati</option>
+                    <option>Punjabi</option>
+                    <option>Dutch</option>
+                    <option>Greek</option>
+                    <option>Swahili</option>
+
+                </select>
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>
+                    Search Teacher
+                </label>
+
+                <input
+                    type="text"
+                    id="teacherSearch"
+                    placeholder="Enter teacher name">
+
+            </div>
+
+        </div>
+
+
+        <div class="filter-buttons">
+
+            <button
+                class="btn btn-primary"
+                onclick="filterClasses()">
+
+                Search Classes
+
+            </button>
+
+
+            <button
+                class="btn btn-light"
+                onclick="resetFilters()">
+
+                Reset
+
+            </button>
+
+        </div>
+
+    </section>
+
+
+    <h2 class="section-title">
+        Available Live Classes
+    </h2>
+
+
+    <section
+        class="class-grid"
+        id="classGrid">
+
+
+        <article
+            class="class-card"
+            data-day="Monday"
+            data-program="Reading Quran"
+            data-language="English"
+            data-teacher="Muhammad Ahmed">
+
+
+            <div class="class-top">
+
+                <span class="status live">
+                    LIVE
+                </span>
+
+                <h3>
+                    Quran Reading Class
+                </h3>
+
+                <p>
+                    Live Quran reading session
+                </p>
+
+            </div>
+
+
+            <div class="class-body">
+
+
+                <div class="teacher">
+
+                    <div class="teacher-avatar">
+                        🧑‍🏫
+                    </div>
+
+                    <div>
+
+                        <h4>
+                            Muhammad Ahmed
+                        </h4>
+
+                        <p>
+                            Quran Teacher
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="class-info">
+
+                    <span>
+                        Day
+                    </span>
+
+                    <strong>
+                        Monday
+                    </strong>
+
+                </div>
+
+
+                <div class="class-info">
+
+                    <span>
+                        Time
+                    </span>
+
+                    <strong>
+                        05:00 PM - 06:00 PM
+                    </strong>
+
+                </div>
+
+
+                <div class="class-info">
+
+                    <span>
+                        Program
+                    </span>
+
+                    <strong>
+                        Reading Quran
+                    </strong>
+
+                </div>
+
+
+                <div class="class-info">
+
+                    <span>
+                        Language
+                    </span>
+
+                    <strong>
+                        English
+                    </strong>
+
+                </div>
+
+
+                <div class="class-info">
+
+                    <span>
+                        Students
+                    </span>
+
+                    <strong>
+                        8 / 15
+                    </strong>
+
+                </div>
+
+
+                <div class="class-actions">
+
+                    <button
+                        class="btn btn-primary"
+                        onclick="joinClass('Muhammad Ahmed')">
+
+                        Join Class
+
+                    </button>
+
+                    <button
+                        class="btn btn-light"
+                        onclick="viewClass('Muhammad Ahmed')">
+
+                        Details
+
+                    </button>
+
+                </div>
+
+            </div>
+
+        </article>
+
+
+
+        <article
+            class="class-card"
+            data-day="Tuesday"
+            data-program="Hifz-e-Jadeed"
+            data-language="Urdu"
+            data-teacher="Abdul Rahman">
+
+
+            <div class="class-top">
+
+                <span class="status upcoming">
+                    UPCOMING
+                </span>
+
+                <h3>
+                    Hifz-e-Jadeed Class
+                </h3>
+
+                <p>
+                    Quran memorization session
+                </p>
+
+            </div>
+
+
+            <div class="class-body">
+
+
+                <div class="teacher">
+
+                    <div class="teacher-avatar">
+                        🧑‍🏫
+                    </div>
+
+                    <div>
+
+                        <h4>
+                            Abdul Rahman
+                        </h4>
+
+                        <p>
+                            Quran Teacher
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="class-info">
+
+                    <span>
+                        Day
+                    </span>
+
+                    <strong>
+                        Tuesday
+                    </strong>
+
+                </div>
+
+
+                <div class="class-info">
+
+                    <span>
+                        Time
+                    </span>
+
+                    <strong>
+                        06:00 PM - 07:00 PM
+                    </strong>
+
+                </div>
+
+
+                <div class="class-info">
+
+                    <span>
+                        Program
+                    </span>
+
+                    <strong>
+                        Hifz-e-Jadeed
+                    </strong>
+
+                </div>
+
+
+                <div class="class-info">
+
+                    <span>
+                        Language
+                    </span>
+
+                    <strong>
+                        Urdu
+                    </strong>
+
+                </div>
+
+
+                <div class="class-info">
+
+                    <span>
+                        Students
+                    </span>
+
+                    <strong>
+                        6 / 12
+                    </strong>
+
+                </div>
+
+
+                <div class="class-actions">
+
+                    <button
+                        class="btn btn-primary"
+                        onclick="joinClass('Abdul Rahman')">
+
+                        Join Class
+
+                    </button>
+
+                    <button
+                        class="btn btn-light"
+                        onclick="viewClass('Abdul Rahman')">
+
+                        Details
+
+                    </button>
+
+                </div>
+
+            </div>
+
+        </article>
+
+
+
+        <article
+            class="class-card"
+            data-day="Wednesday"
+            data-program="Mushq Quran"
+            data-language="Arabic"
+            data-teacher="Yusuf Ali">
+
+
+            <div class="class-top">
+
+                <span class="status available">
+                    AVAILABLE
+                </span>
+
+                <h3>
+                    Mushq Quran Class
+                </h3>
+
+                <p>
+                    Quran practice and correction
+                </p>
+
+            </div>
+
+
+            <div class="class-body">
+
+
+                <div class="teacher">
+
+                    <div class="teacher-avatar">
+                        🧑‍🏫
+                    </div>
+
+                    <div>
+
+                        <h4>
+                            Yusuf Ali
+                        </h4>
+
+                        <p>
+                            Quran Teacher
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="class-info">
+
+                    <span>
+                        Day
+                    </span>
+
+                    <strong>
+                        Wednesday
+                    </strong>
+
+                </div>
+
+
+                <div class="class-info">
+
+                    <span>
+                        Time
+                    </span>
+
+                    <strong>
+                        07:00 PM - 08:00 PM
+                    </strong>
+
+                </div>
+
+
+                <div class="class-info">
+
+                    <span>
+                        Program
+                    </span>
+
+                    <strong>
+                        Mushq Quran
+                    </strong>
+
+                </div>
+
+
+                <div class="class-info">
+
+                    <span>
+                        Language
+                    </span>
+
+                    <strong>
+                        Arabic
+                    </strong>
+
+                </div>
+
+
+                <div class="class-info">
+
+                    <span>
+                        Students
+                    </span>
+
+                    <strong>
+                        4 / 10
+                    </strong>
+
+                </div>
+
+
+                <div class="class-actions">
+
+                    <button
+                        class="btn btn-primary"
+                        onclick="joinClass('Yusuf Ali')">
+
+                        Join Class
+
+                    </button>
+
+                    <button
+                        class="btn btn-light"
+                        onclick="viewClass('Yusuf Ali')">
+
+                        Details
+
+                    </button>
+
+                </div>
+
+            </div>
+
+        </article>
+
+
+
+        <article
+            class="class-card"
+            data-day="Thursday"
+            data-program="Hadar Quran"
+            data-language="English"
+            data-teacher="Omar Farooq">
+
+
+            <div class="class-top">
+
+                <span class="status upcoming">
+                    UPCOMING
+                </span>
+
+                <h3>
+                    Hadar Quran Class
+                </h3>
+
+                <p>
+                    Quran revision session
+                </p>
+
+            </div>
+
+
+            <div class="class-body">
+
+
+                <div class="teacher">
+
+                    <div class="teacher-avatar">
+                        🧑‍🏫
+                    </div>
+
+                    <div>
+
+                        <h4>
+                            Omar Farooq
+                        </h4>
+
+                        <p>
+                            Quran Teacher
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="class-info">
+
+                    <span>
+                        Day
+                    </span>
+
+                    <strong>
+                        Thursday
+                    </strong>
+
+                </div>
+
+
+                <div class="class-info">
+
+                    <span>
+                        Time
+                    </span>
+
+                    <strong>
+                        05:30 PM - 06:30 PM
+                    </strong>
+
+                </div>
+
+
+                <div class="class-info">
+
+                    <span>
+                        Program
+                    </span>
+
+                    <strong>
+                        Hadar Quran
+                    </strong>
+
+                </div>
+
+
+                <div class="class-info">
+
+                    <span>
+                        Language
+                    </span>
+
+                    <strong>
+                        English
+                    </strong>
+
+                </div>
+
+
+                <div class="class-info">
+
+                    <span>
+                        Students
+                    </span>
+
+                    <strong>
+                        5 / 15
+                    </strong>
+
+                </div>
+
+
+                <div class="class-actions">
+
+                    <button
+                        class="btn btn-primary"
+                        onclick="joinClass('Omar Farooq')">
+
+                        Join Class
+
+                    </button>
+
+                    <button
+                        class="btn btn-light"
+                        onclick="viewClass('Omar Farooq')">
+
+                        Details
+
+                    </button>
+
+                </div>
+
+            </div>
+
+        </article>
+
+
+
+        <article
+            class="class-card"
+            data-day="Friday"
+            data-program="Reading Quran"
+            data-language="Arabic"
+            data-teacher="Ibrahim Hassan">
+
+
+            <div class="class-top">
+
+                <span class="status available">
+                    AVAILABLE
+                </span>
+
+                <h3>
+                    Quran Reading Class
+                </h3>
+
+                <p>
+                    Reading with pronunciation correction
+                </p>
+
+            </div>
+
+
+            <div class="class-body">
+
+
+                <div class="teacher">
+
+                    <div class="teacher-avatar">
+                        🧑‍🏫
+                    </div>
+
+                    <div>
+
+                        <h4>
+                            Ibrahim Hassan
+                        </h4>
+
+                        <p>
+                            Quran Teacher
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="class-info">
+
+                    <span>
+                        Day
+                    </span>
+
+                    <strong>
+                        Friday
+                    </strong>
+
+                </div>
+
+
+                <div class="class-info">
+
+                    <span>
+                        Time
+                    </span>
+
+                    <strong>
+                        04:00 PM - 05:00 PM
+                    </strong>
+
+                </div>
+
+
+                <div class="class-info">
+
+                    <span>
+                        Program
+                    </span>
+
+                    <strong>
+                        Reading Quran
+                    </strong>
+
+                </div>
+
+
+                <div class="class-info">
+
+                    <span>
+                        Language
+                    </span>
+
+                    <strong>
+                        Arabic
+                    </strong>
+
+                </div>
+
+
+                <div class="class-info">
+
+                    <span>
+                        Students
+                    </span>
+
+                    <strong>
+                        3 / 10
+                    </strong>
+
+                </div>
+
+
+                <div class="class-actions">
+
+                    <button
+                        class="btn btn-primary"
+                        onclick="joinClass('Ibrahim Hassan')">
+
+                        Join Class
+
+                    </button>
+
+                    <button
+                        class="btn btn-light"
+                        onclick="viewClass('Ibrahim Hassan')">
+
+                        Details
+
+                    </button>
+
+                </div>
+
+            </div>
+
+        </article>
+
+
+
+        <article
+            class="class-card"
+            data-day="Saturday"
+            data-program="Hifz-e-Jadeed"
+            data-language="Hindi"
+            data-teacher="Abu Bakr">
+
+
+            <div class="class-top">
+
+                <span class="status available">
+                    AVAILABLE
+                </span>
+
+                <h3>
+                    Hifz-e-Jadeed Class
+                </h3>
+
+                <p>
+                    New Quran memorization lesson
+                </p>
+
+            </div>
+
+
+            <div class="class-body">
+
+
+                <div class="teacher">
+
+                    <div class="teacher-avatar">
+                        🧑‍🏫
+                    </div>
+
+                    <div>
+
+                        <h4>
+                            Abu Bakr
+                        </h4>
+
+                        <p>
+                            Quran Teacher
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="class-info">
+
+                    <span>
+                        Day
+                    </span>
+
+                    <strong>
+                        Saturday
+                    </strong>
+
+                </div>
+
+
+                <div class="class-info">
+
+                    <span>
+                        Time
+                    </span>
+
+                    <strong>
+                        08:00 PM - 09:00 PM
+                    </strong>
+
+                </div>
+
+
+                <div class="class-info">
+
+                    <span>
+                        Program
+                    </span>
+
+                    <strong>
+                        Hifz-e-Jadeed
+                    </strong>
+
+                </div>
+
+
+                <div class="class-info">
+
+                    <span>
+                        Language
+                    </span>
+
+                    <strong>
+                        Hindi
+                    </strong>
+
+                </div>
+
+
+                <div class="class-info">
+
+                    <span>
+                        Students
+                    </span>
+
+                    <strong>
+                        7 / 15
+                    </strong>
+
+                </div>
+
+
+                <div class="class-actions">
+
+                    <button
+                        class="btn btn-primary"
+                        onclick="joinClass('Abu Bakr')">
+
+                        Join Class
+
+                    </button>
+
+                    <button
+                        class="btn btn-light"
+                        onclick="viewClass('Abu Bakr')">
+
+                        Details
+
+                    </button>
+
+                </div>
+
+            </div>
+
+        </article>
+
+
+    </section>
+
+
+    <div
+        class="empty"
+        id="noClasses"
+        style="display:none;">
+
+        No classes found for the selected filters.
+
+    </div>
+
+
+    <h2 class="section-title">
+        Teacher Schedule Management
+    </h2>
+
+
+    <section class="card">
+
+        <p style="color:#6b7280; margin-bottom:20px;">
+
+            Teachers can create their own available
+            schedule from the Teacher Dashboard.
+
+        </p>
+
+
+        <div class="teacher-schedule">
+
+
+            <div class="schedule-box">
+
+                <h3>
+                    Teacher Controlled Schedule
+                </h3>
+
+                <p>
+                    Teachers choose their own available days.
+                </p>
+
+                <p>
+                    Teachers choose their own class times.
+                </p>
+
+                <p>
+                    Teachers choose the Quran program.
+                </p>
+
+                <p>
+                    Teachers choose the teaching language.
+                </p>
+
+                <p>
+                    Teachers choose class capacity.
+                </p>
+
+            </div>
+
+
+            <div class="schedule-box">
+
+                <h3>
+                    Quran Programs
+                </h3>
+
+                <p>
+                    Reading Quran
+                </p>
+
+                <p>
+                    Hifz-e-Jadeed
+                </p>
+
+                <p>
+                    Mushq Quran
+                </p>
+
+                <p>
+                    Hadar Quran
+                </p>
+
+            </div>
+
+
+        </div>
+
+
+        <div style="margin-top:20px;">
+
+            <a
+                href="teacher.html"
+                class="btn btn-primary">
+
+                Open Teacher Dashboard
+
+            </a>
+
+        </div>
+
+    </section>
+
+
+    <h2 class="section-title">
+        How Live Classes Work
+    </h2>
+
+
+    <section class="card">
+
+
+        <div class="teacher-schedule">
+
+
+            <div class="schedule-box">
+
+                <h3>
+                    1. Teacher Creates Schedule
+                </h3>
+
+                <p>
+                    The teacher selects the available
+                    day and time.
+                </p>
+
+            </div>
+
+
+            <div class="schedule-box">
+
+                <h3>
+                    2. Student Finds Class
+                </h3>
+
+                <p>
+                    Students search by day,
+                    program, language, or teacher.
+                </p>
+
+            </div>
+
+
+            <div class="schedule-box">
+
+                <h3>
+                    3. Student Joins
+                </h3>
+
+                <p>
+                    The student can select an
+                    available live class.
+                </p>
+
+            </div>
+
+
+            <div class="schedule-box">
+
+                <h3>
+                    4. Live Lesson
+                </h3>
+
+                <p>
+                    Teacher and students attend
+                    the scheduled Quran lesson.
+                </p>
+
+            </div>
+
+
+        </div>
+
+    </section>
+
+
+</main>
+
+
+<footer>
+
+    <strong>
+        Learn Hub Quran
+    </strong>
+
+    <p>
+        Online Quran learning platform for
+        students and qualified Quran teachers.
+    </p>
+
+    <p>
+        Contact:
+        Sjan70985@gmail.com
+        |
+        03255411647
+    </p>
+
+    <p>
+        © 2026 Learn Hub Quran.
+        All rights reserved.
+    </p>
+
+</footer>
+
+
+<script>
+
+
+    function changeLanguage(language) {
+
+        localStorage.setItem(
+            "selectedLanguage",
+            language
+        );
+
+        alert(
+            "Language selected: " + language
+        );
+    }
+
+
+
+    function filterClasses() {
+
+        const day =
+            document.getElementById(
+                "filterDay"
+            ).value;
+
+
+        const program =
+            document.getElementById(
+                "filterProgram"
+            ).value;
+
+
+        const language =
+            document.getElementById(
+                "filterLanguage"
+            ).value;
+
+
+        const teacher =
+            document.getElementById(
+                "teacherSearch"
+            ).value
+            .toLowerCase()
+            .trim();
+
+
+        const cards =
+            document.querySelectorAll(
+                ".class-card"
+            );
+
+
+        let visibleCount = 0;
+
+
+        cards.forEach(function(card) {
+
+            const cardDay =
+                card.dataset.day;
+
+
+            const cardProgram =
+                card.dataset.program;
+
+
+            const cardLanguage =
+                card.dataset.language;
+
+
+            const cardTeacher =
+                card.dataset.teacher
+                .toLowerCase();
+
+
+            const dayMatch =
+                day === "all" ||
+                cardDay === day;
+
+
+            const programMatch =
+                program === "all" ||
+                cardProgram === program;
+
+
+            const languageMatch =
+                language === "all" ||
+                cardLanguage === language;
+
+
+            const teacherMatch =
+                teacher === "" ||
+                cardTeacher.includes(
+                    teacher
+                );
+
+
+            if (
+                dayMatch &&
+                programMatch &&
+                languageMatch &&
+                teacherMatch
+            ) {
+
+                card.style.display =
+                    "block";
+
+                visibleCount++;
+
+            } else {
+
+                card.style.display =
+                    "none";
+
+            }
+
+        });
+
+
+        const noClasses =
+            document.getElementById(
+                "noClasses"
+            );
+
+
+        if (visibleCount === 0) {
+
+            noClasses.style.display =
+                "block";
+
+        } else {
+
+            noClasses.style.display =
+                "none";
+
+        }
+
+    }
+
+
+
+    function resetFilters() {
+
+        document.getElementById(
+            "filterDay"
+        ).value = "all";
+
+
+        document.getElementById(
+            "filterProgram"
+        ).value = "all";
+
+
+        document.getElementById(
+            "filterLanguage"
+        ).value = "all";
+
+
+        document.getElementById(
+            "teacherSearch"
+        ).value = "";
+
+
+        const cards =
+            document.querySelectorAll(
+                ".class-card"
+            );
+
+
+        cards.forEach(function(card) {
+
+            card.style.display =
+                "block";
+
+        });
+
+
+        document.getElementById(
+            "noClasses"
+        ).style.display =
+            "none";
+
+    }
+
+
+
+    function joinClass(teacherName) {
+
+        alert(
+            "You selected a live class with " +
+            teacherName +
+            "."
+        );
+
+    }
+
+
+
+    function viewClass(teacherName) {
+
+        alert(
+            "Class details for " +
+            teacherName +
+            " will appear here."
+        );
+
+    }
+
+
+</script>
+
+
+</body>
+</html>
