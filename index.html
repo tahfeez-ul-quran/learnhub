@@ -856,68 +856,142 @@ Contact: Sjan70985@gmail.com | 03255411647
 </footer>
 
 
-<script>
+<!-- FIREBASE + WEBSITE SCRIPT -->
+
+<script type="module">
+
+import {
+    initializeApp
+} from "https://www.gstatic.com/firebasejs/12.19.0/firebase-app.js";
+
+import {
+    getAnalytics
+} from "https://www.gstatic.com/firebasejs/12.19.0/firebase-analytics.js";
+
+import {
+    getAuth
+} from "https://www.gstatic.com/firebasejs/12.19.0/firebase-auth.js";
+
+import {
+    getFirestore
+} from "https://www.gstatic.com/firebasejs/12.19.0/firebase-firestore.js";
+
+
+const firebaseConfig = {
+
+    apiKey: "AIzaSyAdWXljc4GS9kWcNUo-QTWIEF1Lzeo-owg",
+
+    authDomain: "learn-hub-quran.firebaseapp.com",
+
+    projectId: "learn-hub-quran",
+
+    storageBucket: "learn-hub-quran.firebasestorage.app",
+
+    messagingSenderId: "795140160592",
+
+    appId: "1:795140160592:web:f761eaa4043ad0e73f2555",
+
+    measurementId: "G-6G90VGC6CC"
+
+};
+
+
+const app = initializeApp(firebaseConfig);
+
+const analytics = getAnalytics(app);
+
+const auth = getAuth(app);
+
+const db = getFirestore(app);
+
+
+/*
+Make Firebase services available
+to the other website code.
+*/
+
+window.learnHubFirebaseApp = app;
+
+window.learnHubFirebaseAnalytics = analytics;
+
+window.learnHubFirebaseAuth = auth;
+
+window.learnHubFirebaseDB = db;
+
+
+/*
+Firebase connection test
+*/
+
+console.log("Learn Hub Quran Firebase connected successfully.");
+
+console.log("Firebase Authentication ready.");
+
+console.log("Cloud Firestore ready.");
+
 
 /* LANGUAGE */
 
-function changeLanguage(language){
+window.changeLanguage = function(language){
 
-localStorage.setItem(
-"studentLanguage",
-language
-);
+    localStorage.setItem(
+        "studentLanguage",
+        language
+    );
 
-alert(
-"Language selected: " + language
-);
+    alert(
+        "Language selected: " + language
+    );
 
-}
+};
 
 
 /* PROGRAM */
 
-function openProgram(program){
+window.openProgram = function(program){
 
-localStorage.setItem(
-"selectedProgram",
-program
-);
+    localStorage.setItem(
+        "selectedProgram",
+        program
+    );
 
-window.location.href="student.html";
+    window.location.href = "student.html";
 
-}
+};
 
 
 /* LOAD SAVED LANGUAGE */
 
 window.addEventListener(
-"DOMContentLoaded",
-function(){
+    "DOMContentLoaded",
+    function(){
 
-const savedLanguage=
-localStorage.getItem(
-"studentLanguage"
+        const savedLanguage =
+            localStorage.getItem(
+                "studentLanguage"
+            );
+
+        if(savedLanguage){
+
+            const languageSelect =
+                document.getElementById(
+                    "homeLanguage"
+                );
+
+            if(languageSelect){
+
+                languageSelect.value =
+                    savedLanguage;
+
+            }
+
+        }
+
+    }
 );
-
-if(savedLanguage){
-
-const languageSelect=
-document.getElementById(
-"homeLanguage"
-);
-
-if(languageSelect){
-
-languageSelect.value=
-savedLanguage;
-
-}
-
-}
-
-});
 
 </script>
 
 </body>
 </html>
+```0
