@@ -20,25 +20,16 @@ from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 // یہاں اپنی Firebase Web App کی اصل configuration
 // paste کرنی ہے۔
 
+// For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
-
-  apiKey: "YOUR_API_KEY",
-
-  authDomain:
-    "YOUR_PROJECT.firebaseapp.com",
-
-  projectId:
-    "YOUR_PROJECT_ID",
-
-  storageBucket:
-    "YOUR_PROJECT.appspot.com",
-
-  messagingSenderId:
-    "YOUR_MESSAGING_SENDER_ID",
-
-  appId:
-    "YOUR_APP_ID"
-
+  apiKey: "AIzaSyAdWXljc4GS9kWcNUo-QTWIEF1Lzeo-owg",
+  authDomain: "learn-hub-quran.firebaseapp.com",
+  databaseURL: "https://learn-hub-quran-default-rtdb.firebaseio.com",
+  projectId: "learn-hub-quran",
+  storageBucket: "learn-hub-quran.firebasestorage.app",
+  messagingSenderId: "795140160592",
+  appId: "1:795140160592:web:f761eaa4043ad0e73f2555",
+  measurementId: "G-6G90VGC6CC"
 };
 
 
