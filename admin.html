@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <title>Learn Hub - Admin</title>
+
+  <link
+    rel="stylesheet"
+    href="styles.css"
+  >
+
+</head>
+
+
+<body>
+
+
+<header>
+
+  <h1>Learn Hub</h1>
+
+  <p>Admin Dashboard</p>
+
+</header>
+
+
+<main class="container">
+
+
+  <section class="card">
+
+    <h2>Admin Panel</h2>
+
+    <p id="status">
+      Checking account...
+    </p>
+
+    <p>
+      Admin permissions are controlled
+      by Firebase Security Rules.
+    </p>
+
+  </section>
+
+
+  <section class="card">
+
+    <h2>Manage Classes</h2>
+
+    <div id="classList">
+      Loading...
+    </div>
+
+  </section>
+
+
+  <button
+    id="logoutBtn"
+    class="secondary"
+  >
+
+    Sign Out
+
+  </button>
+
+
+</main>
+
+
+<script type="module">
+
+
+  import {
+    auth,
+    db
+  }
+  from "./firebase-config.js";
+
+
+  import {
+    onAuthStateChanged,
+    signOut
+  }
+  from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+
+
+  import {
+    collection,
+    getDocs,
+    query,
+    orderBy,
+    doc,
+    updateDoc
+  }
+  from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+
+  const status =
+    document.getElementById(
+      "status"
+    );
+
+
+  const classList =
+    document.getElementById(
+      "classList"
+    );
+
+
+  const logoutBtn =
+    document.getElementById(
+      "logoutBtn"
+    );
+
+
+  let currentUser = null;
+
+
+  // ==============================
+  // CHECK ADMIN LOGIN
+  // ==============================
+
+  onAuthStateChanged(
+    auth,
+    async (user) => {
+
+      if (!user) {
+
+        currentUser = null;
+
+        status.textContent =
+          "Please sign in first.";
+
+        classList.textContent =
+          "Please sign in first.";
+
+        return;
+
+      }
+
+
+      currentUser =
+        user;
+
+
+      status.textContent =
+        "Signed in as: " +
+        (user.email || "User");
+
+
+      await loadClasses();
+
+    }
+  );
+
+
+  // ==============================
+  // LOAD CLASSES
+  // ==============================
+
+  async function loadClasses() {
+
+    classList.innerHTML =
+      "Loading classes...";
+
+
+    try {
+
+      const classesRef =
+        collection(
+          db,
+          "classes"
+        );
+
+
+      const classesQuery =
+        query(
+          classesRef,
+          orderBy(
+            "startAt",
+            "asc"
+          )
+        );
+
+
+      const snapshot =
+        await getDocs(
+          classesQuery
+        );
+
+
+      classList.innerHTML =
+        "";
+
+
+      if (snapshot.empty) {
+
+        classList.textContent =
+          "No classes found.";
+
+        return;
+
+      }
+
+
+      snapshot.forEach(
+        (classDoc) => {
+
+          const data =
+            classDoc.data();
+
+
+          const box =
+            document.createElement(
+              "div"
+            );
+
+
+          box.className =
+            "class";
+
+
+          const title =
+            document.createElement(
+              "h3"
+            );
+
+
+          title.textContent =
+            data.title ||
+            "Class";
+
+
+          const teacher =
+            document.createElement(
+              "p"
+            );
+
+
+          teacher.textContent =
+            "Teacher: " +
+            (
+              data.teacherName ||
+              "Teacher"
+            );
+
+
+          const time =
+            document.createElement(
+              "p"
+            );
+
+
+          time.textContent =
+            data.startText ||
+            "Scheduled";
+
+
+          const state =
+            document.createElement(
+              "p"
+            );
+
+
+          state.textContent =
+            "Status: " +
+            (
+              data.published === false
+                ? "Hidden"
+                : "Published"
+            );
+
+
+          const button =
+            document.createElement(
+              "button"
+            );
+
+
+          button.textContent =
+            data.published === false
+              ? "Publish"
+              : "Hide";
+
+
+          button.addEventListener(
+            "click",
+            async () => {
+
+              await changeClassStatus(
+                classDoc.id,
+                data.published === false
+              );
+
+            }
+          );
+
+
+          box.appendChild(
+            title
+          );
+
+
+          box.appendChild(
+            teacher
+          );
+
+
+          box.appendChild(
+            time
+          );
+
+
+          box.appendChild(
+            state
+          );
+
+
+          box.appendChild(
+            button
+          );
+
+
+          classList.appendChild(
+            box
+          );
+
+        }
+      );
+
+    }
+
+    catch (error) {
+
+      console.error(
+        "Admin classes error:",
+        error
+      );
+
+
+      classList.textContent =
+        "Classes could not be loaded. Check Firebase Rules.";
+
+    }
+
+  }
+
+
+  // ==============================
+  // PUBLISH / HIDE CLASS
+  // ==============================
+
+  async function changeClassStatus(
+    classId,
+    newStatus
+  ) {
+
+    try {
+
+      await updateDoc(
+
+        doc(
+          db,
+          "classes",
+          classId
+        ),
+
+        {
+          published:
+            newStatus
+        }
+
+      );
+
+
+      await loadClasses();
+
+    }
+
+    catch (error) {
+
+      console.error(
+        "Permission error:",
+        error
+      );
+
+
+      alert(
+        "Permission denied. Firebase Admin Rules must allow this account."
+      );
+
+    }
+
+  }
+
+
+  // ==============================
+  // SIGN OUT
+  // ==============================
+
+  logoutBtn.addEventListener(
+    "click",
+    async () => {
+
+      try {
+
+        await signOut(
+          auth
+        );
+
+
+        window.location.href =
+          "index.html";
+
+      }
+
+      catch (error) {
+
+        console.error(
+          error
+        );
+
+      }
+
+    }
+  );
+
+
+</script>
+
+
+</body>
+
+</html>
