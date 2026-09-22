@@ -1,2890 +1,530 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Student Dashboard - Learn Hub Quran</title>
+  <title>Student Profile - Learn Hub</title>
 
-<style>
-
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-}
-
-body{
-    font-family:Arial,Helvetica,sans-serif;
-    background:#f6faf7;
-    color:#1f2937;
-    line-height:1.6;
-}
-
-button,input,select,textarea{
-    font-family:inherit;
-}
-
-button{
-    cursor:pointer;
-}
-
-header{
-    background:#fff;
-    box-shadow:0 2px 12px rgba(0,0,0,.08);
-    position:sticky;
-    top:0;
-    z-index:1000;
-}
-
-.navbar{
-    max-width:1200px;
-    min-height:70px;
-    margin:auto;
-    padding:12px 20px;
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    gap:20px;
-}
-
-.logo{
-    font-size:24px;
-    font-weight:bold;
-    color:#087443;
-    text-decoration:none;
-}
-
-.logo span{
-    color:#c99c24;
-}
-
-.nav-links{
-    display:flex;
-    align-items:center;
-    gap:8px;
-    flex-wrap:wrap;
-}
-
-.nav-links a{
-    text-decoration:none;
-    color:#1f2937;
-    padding:9px 12px;
-    border-radius:7px;
-    font-size:14px;
-}
-
-.nav-links a:hover{
-    background:#087443;
-    color:#fff;
-}
-
-.language-select{
-    padding:8px;
-    border:1px solid #d5ddd8;
-    border-radius:7px;
-    background:#fff;
-}
-
-.page-header{
-    background:linear-gradient(135deg,#075e36,#0b8b51);
-    color:#fff;
-    padding:60px 20px;
-    text-align:center;
-}
-
-.page-header h1{
-    font-size:42px;
-    margin-bottom:10px;
-}
-
-.page-header p{
-    color:#e8f6ef;
-}
-
-.container{
-    max-width:1200px;
-    margin:auto;
-    padding:45px 20px;
-}
-
-.section-title{
-    color:#075e36;
-    font-size:27px;
-    margin:30px 0 18px;
-}
-
-.card{
-    background:#fff;
-    border:1px solid #e3ebe6;
-    border-radius:16px;
-    padding:25px;
-    margin-bottom:25px;
-    box-shadow:0 4px 15px rgba(0,0,0,.04);
-}
-
-/* AUTH */
-
-.auth-card{
-    max-width:650px;
-    margin:0 auto 30px;
-}
-
-.auth-header{
-    text-align:center;
-    margin-bottom:25px;
-}
-
-.auth-header h2{
-    color:#075e36;
-    margin-bottom:7px;
-}
-
-.auth-header p{
-    color:#6b7280;
-}
-
-.auth-status{
-    background:#eef8f2;
-    border-left:4px solid #087443;
-    padding:14px;
-    border-radius:8px;
-    margin-bottom:20px;
-    display:none;
-}
-
-.auth-status.show{
-    display:block;
-}
-
-.auth-error{
-    background:#fff0f0;
-    border-left:4px solid #d64545;
-    padding:14px;
-    border-radius:8px;
-    margin-bottom:20px;
-    display:none;
-    color:#9b2525;
-}
-
-.auth-error.show{
-    display:block;
-}
-
-.auth-grid{
-    display:grid;
-    grid-template-columns:1fr 1fr;
-    gap:18px;
-}
-
-.auth-actions{
-    margin-top:20px;
-    display:flex;
-    gap:10px;
-    flex-wrap:wrap;
-}
-
-.logged-in-box{
-    background:#eef8f2;
-    border:1px solid #cce8d6;
-    padding:20px;
-    border-radius:12px;
-}
-
-.logged-in-box strong{
-    color:#075e36;
-}
-
-.uid-box{
-    margin-top:8px;
-    font-size:12px;
-    color:#6b7280;
-    word-break:break-all;
-}
-
-/* PROFILE */
-
-.profile-header{
-    display:flex;
-    align-items:center;
-    gap:18px;
-    margin-bottom:25px;
-}
-
-.profile-icon{
-    width:70px;
-    height:70px;
-    border-radius:50%;
-    background:#e7f6ed;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    font-size:35px;
-}
-
-.profile-header h2{
-    color:#075e36;
-}
-
-.profile-header p{
-    color:#6b7280;
-}
-
-.profile-grid{
-    display:grid;
-    grid-template-columns:repeat(2,1fr);
-    gap:18px;
-}
-
-.form-group label{
-    display:block;
-    font-weight:bold;
-    margin-bottom:7px;
-}
-
-.form-group input,
-.form-group select,
-.form-group textarea{
-    width:100%;
-    padding:11px;
-    border:1px solid #d5ddd8;
-    border-radius:8px;
-    outline:none;
-}
-
-.form-group textarea{
-    min-height:100px;
-    resize:vertical;
-}
-
-.form-group input:focus,
-.form-group select:focus,
-.form-group textarea:focus{
-    border-color:#087443;
-}
-
-/* BUTTONS */
-
-.btn{
-    border:0;
-    padding:11px 18px;
-    border-radius:8px;
-    font-weight:bold;
-    transition:.2s;
-}
-
-.btn:hover{
-    transform:translateY(-2px);
-    opacity:.92;
-}
-
-.btn-primary{
-    background:#087443;
-    color:#fff;
-}
-
-.btn-gold{
-    background:#c99c24;
-    color:#fff;
-}
-
-.btn-light{
-    background:#eaf7ef;
-    color:#075e36;
-}
-
-.btn-danger{
-    background:#d64545;
-    color:#fff;
-}
-
-/* PROGRAMS */
-
-.program-grid{
-    display:grid;
-    grid-template-columns:repeat(5,1fr);
-    gap:16px;
-}
-
-.program-card{
-    background:#fff;
-    border:1px solid #e3ebe6;
-    border-radius:14px;
-    padding:22px 15px;
-    text-align:center;
-    cursor:pointer;
-    transition:.2s;
-}
-
-.program-card:hover{
-    transform:translateY(-4px);
-    border-color:#087443;
-}
-
-.program-card.active{
-    border:2px solid #087443;
-    background:#f0faf4;
-}
-
-.program-icon{
-    font-size:35px;
-    margin-bottom:8px;
-}
-
-.program-card h3{
-    color:#075e36;
-    margin-bottom:6px;
-    font-size:17px;
-}
-
-.program-card p{
-    color:#6b7280;
-    font-size:12px;
-}
-
-/* DASHBOARD */
-
-.dashboard-grid{
-    display:grid;
-    grid-template-columns:repeat(3,1fr);
-    gap:18px;
-}
-
-.dashboard-card{
-    background:#fff;
-    border:1px solid #e3ebe6;
-    border-radius:15px;
-    padding:22px;
-}
-
-.dashboard-card .icon{
-    font-size:30px;
-}
-
-.dashboard-card h3{
-    color:#075e36;
-    margin:6px 0;
-}
-
-.dashboard-card p{
-    color:#6b7280;
-    font-size:14px;
-}
-
-/* TABLE */
-
-.table-wrapper{
-    overflow-x:auto;
-}
-
-table{
-    width:100%;
-    min-width:800px;
-    border-collapse:collapse;
-}
-
-th,td{
-    padding:13px;
-    border-bottom:1px solid #e5e7eb;
-    text-align:center;
-}
-
-th{
-    background:#087443;
-    color:#fff;
-}
-
-.status{
-    display:inline-block;
-    padding:5px 10px;
-    border-radius:15px;
-    font-size:12px;
-    font-weight:bold;
-}
-
-.available{
-    background:#e5f7eb;
-    color:#087443;
-}
-
-.booked{
-    background:#fff2d5;
-    color:#946b00;
-}
-
-/* HOMEWORK */
-
-.homework-item{
-    padding:17px 0;
-    border-bottom:1px solid #e5e7eb;
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    gap:15px;
-}
-
-.homework-item:last-child{
-    border-bottom:0;
-}
-
-.homework-info h3{
-    color:#075e36;
-}
-
-.homework-info p{
-    color:#6b7280;
-    font-size:13px;
-}
-
-/* CHAT */
-
-.chat-area{
-    background:#f6faf7;
-    border-radius:12px;
-    padding:20px;
-    min-height:250px;
-    max-height:400px;
-    overflow-y:auto;
-    margin-bottom:15px;
-}
-
-.chat-message{
-    display:flex;
-    margin-bottom:12px;
-}
-
-.chat-message.teacher{
-    justify-content:flex-start;
-}
-
-.chat-message.student{
-    justify-content:flex-end;
-}
-
-.message{
-    max-width:70%;
-    padding:11px 15px;
-    border-radius:13px;
-}
-
-.teacher .message{
-    background:#e3f5ea;
-}
-
-.student .message{
-    background:#087443;
-    color:#fff;
-}
-
-.message small{
-    display:block;
-    margin-top:4px;
-    font-size:10px;
-    opacity:.7;
-}
-
-.chat-input{
-    display:flex;
-    gap:10px;
-}
-
-.chat-input input{
-    flex:1;
-    padding:12px;
-    border:1px solid #d5ddd8;
-    border-radius:8px;
-}
-
-/* PAYMENT */
-
-.payment-grid{
-    display:grid;
-    grid-template-columns:repeat(3,1fr);
-    gap:15px;
-}
-
-.payment-box{
-    background:#f5faf7;
-    padding:20px;
-    border-radius:10px;
-}
-
-.payment-box span{
-    display:block;
-    color:#6b7280;
-    font-size:13px;
-    margin-bottom:6px;
-}
-
-.payment-box strong{
-    color:#075e36;
-    font-size:18px;
-}
-
-.notice{
-    background:#fff8df;
-    border-left:4px solid #c99c24;
-    padding:15px;
-    border-radius:8px;
-    margin-bottom:20px;
-}
-
-footer{
-    background:#10251c;
-    color:#fff;
-    text-align:center;
-    padding:35px 20px;
-}
-
-footer p{
-    color:#bdc9c2;
-    margin-top:7px;
-    font-size:13px;
-}
-
-/* HIDE DASHBOARD UNTIL LOGIN */
-
-#studentDashboard{
-    display:none;
-}
-
-@media(max-width:1000px){
-
-    .program-grid{
-        grid-template-columns:repeat(3,1fr);
+  <style>
+    * {
+      box-sizing: border-box;
     }
 
-}
-
-@media(max-width:800px){
-
-    .dashboard-grid,
-    .payment-grid{
-        grid-template-columns:1fr;
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #f4f7fb;
+      color: #222;
     }
 
-    .profile-grid,
-    .auth-grid{
-        grid-template-columns:1fr;
+    .header {
+      background: #2563eb;
+      color: white;
+      padding: 22px;
+      text-align: center;
     }
 
-    .program-grid{
-        grid-template-columns:repeat(2,1fr);
+    .header h1 {
+      margin: 0;
+      font-size: 28px;
     }
 
-}
-
-@media(max-width:600px){
-
-    .navbar{
-        flex-direction:column;
+    .header p {
+      margin: 7px 0 0;
+      opacity: 0.9;
     }
 
-    .nav-links{
-        justify-content:center;
+    .container {
+      max-width: 650px;
+      margin: 30px auto;
+      padding: 0 18px;
     }
 
-    .page-header h1{
-        font-size:32px;
+    .card {
+      background: white;
+      border-radius: 16px;
+      padding: 25px;
+      box-shadow: 0 5px 20px rgba(0,0,0,0.08);
     }
 
-    .program-grid{
-        grid-template-columns:1fr;
+    .card h2 {
+      margin-top: 0;
+      text-align: center;
     }
 
-    .homework-item{
-        flex-direction:column;
-        align-items:flex-start;
+    .field {
+      margin-bottom: 17px;
     }
 
-    .chat-input{
-        flex-direction:column;
+    label {
+      display: block;
+      font-weight: bold;
+      margin-bottom: 7px;
     }
 
-    .container{
-        padding:30px 15px;
+    input,
+    select {
+      width: 100%;
+      padding: 13px;
+      border: 1px solid #ccd3df;
+      border-radius: 9px;
+      font-size: 16px;
+      outline: none;
     }
 
-}
+    input:focus,
+    select:focus {
+      border-color: #2563eb;
+    }
 
-</style>
+    .save-btn {
+      width: 100%;
+      padding: 14px;
+      border: none;
+      border-radius: 9px;
+      background: #2563eb;
+      color: white;
+      font-size: 17px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .save-btn:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
+
+    .logout-btn {
+      width: 100%;
+      padding: 12px;
+      margin-top: 12px;
+      border: 1px solid #ddd;
+      border-radius: 9px;
+      background: white;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    #message {
+      margin-top: 15px;
+      padding: 12px;
+      border-radius: 8px;
+      display: none;
+      text-align: center;
+    }
+
+    .success {
+      display: block !important;
+      background: #dcfce7;
+      color: #166534;
+    }
+
+    .error {
+      display: block !important;
+      background: #fee2e2;
+      color: #991b1b;
+    }
+  </style>
 </head>
 
 <body>
 
-<header>
+  <div class="header">
+    <h1>Learn Hub</h1>
+    <p>Student Profile</p>
+  </div>
+
+  <div class="container">
+
+    <div class="card">
+
+      <h2>Create / Update Profile</h2>
+
+      <form id="studentForm">
+
+        <div class="field">
+          <label for="fullName">Full Name</label>
+          <input
+            type="text"
+            id="fullName"
+            placeholder="Enter your full name"
+            required
+          >
+        </div>
+
+        <div class="field">
+          <label for="dob">Date of Birth</label>
+          <input
+            type="date"
+            id="dob"
+            required
+          >
+        </div>
+
+        <div class="field">
+          <label for="email">Email</label>
+          <input
+            type="email"
+            id="email"
+            placeholder="Enter your email"
+            required
+          >
+        </div>
+
+        <div class="field">
+          <label for="phone">Phone Number</label>
+          <input
+            type="tel"
+            id="phone"
+            placeholder="Enter your phone number"
+            required
+          >
+        </div>
+
+        <div class="field">
+          <label for="country">Country</label>
+          <input
+            type="text"
+            id="country"
+            placeholder="Enter your country"
+            value="Pakistan"
+            required
+          >
+        </div>
+
+        <div class="field">
+          <label for="language">Preferred Language</label>
+
+          <select id="language" required>
+            <option value="">Select Language</option>
+            <option value="Urdu">Urdu</option>
+            <option value="English">English</option>
+            <option value="Pashto">Pashto</option>
+            <option value="Punjabi">Punjabi</option>
+          </select>
+        </div>
+
+        <button
+          type="submit"
+          class="save-btn"
+          id="saveBtn"
+        >
+          Save Profile
+        </button>
+
+        <button
+          type="button"
+          class="logout-btn"
+          id="logoutBtn"
+        >
+          Sign Out
+        </button>
+
+        <div id="message"></div>
+
+      </form>
+
+    </div>
+
+  </div>
+
+
+  <!-- Firebase -->
+  <script type="module">
 
-<div class="navbar">
+    import { initializeApp }
+      from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
 
-<a href="index.html" class="logo">
-Learn <span>Hub Quran</span>
-</a>
+    import {
+      getAuth,
+      onAuthStateChanged,
+      signOut
+    } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
 
-<nav class="nav-links">
+    import {
+      getFirestore,
+      doc,
+      setDoc,
+      getDoc,
+      serverTimestamp
+    } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
-<a href="index.html">Home</a>
 
-<a href="student.html">Student</a>
+    // ==========================================
+    // FIREBASE CONFIGURATION
+    // ==========================================
 
-<a href="teacher.html">Teacher</a>
+    const firebaseConfig = {
 
-<a href="live-classes.html">Live Classes</a>
+      apiKey: "YOUR_API_KEY",
 
-<select
-class="language-select"
-id="studentLanguageTop"
-onchange="changeLanguage(this.value)">
+      authDomain: "YOUR_PROJECT.firebaseapp.com",
 
-<option>English</option>
-<option>Urdu</option>
-<option>Arabic</option>
-<option>Hindi</option>
-<option>Bengali</option>
-<option>Persian</option>
-<option>Turkish</option>
-<option>Indonesian</option>
-<option>Malay</option>
-<option>French</option>
-<option>Spanish</option>
-<option>German</option>
-<option>Italian</option>
-<option>Portuguese</option>
-<option>Russian</option>
-<option>Chinese</option>
-<option>Japanese</option>
-<option>Korean</option>
-<option>Thai</option>
-<option>Vietnamese</option>
-<option>Tamil</option>
-<option>Telugu</option>
-<option>Malayalam</option>
-<option>Kannada</option>
-<option>Marathi</option>
-<option>Gujarati</option>
-<option>Punjabi</option>
-<option>Dutch</option>
-<option>Greek</option>
-<option>Swahili</option>
+      projectId: "YOUR_PROJECT_ID",
 
-</select>
+      storageBucket: "YOUR_PROJECT.appspot.com",
 
-</nav>
+      messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
 
-</div>
-
-</header>
-
-
-<section class="page-header">
-
-<h1>
-Student Dashboard
-</h1>
-
-<p>
-Create your account and manage your Quran learning.
-</p>
-
-</section>
-
-
-<main class="container">
-
-
-<!-- FIREBASE ACCOUNT -->
-
-<section class="card auth-card">
-
-<div class="auth-header">
-
-<h2>
-Student Account
-</h2>
-
-<p>
-Create your Student account or sign in to continue.
-</p>
-
-</div>
-
-
-<div
-id="authStatus"
-class="auth-status">
-</div>
-
-
-<div
-id="authError"
-class="auth-error">
-</div>
-
-
-<div id="authForm">
-
-<div class="auth-grid">
-
-<div class="form-group">
-
-<label>
-Full Name
-</label>
-
-<input
-type="text"
-id="accountName"
-placeholder="Enter your full name">
-
-</div>
-
-
-<div class="form-group">
-
-<label>
-Email Address
-</label>
-
-<input
-type="email"
-id="accountEmail"
-placeholder="Enter your email">
-
-</div>
-
-
-<div class="form-group">
-
-<label>
-Password
-</label>
-
-<input
-type="password"
-id="accountPassword"
-placeholder="Minimum 6 characters">
-
-</div>
-
-
-<div class="form-group">
-
-<label>
-Confirm Password
-</label>
-
-<input
-type="password"
-id="accountPasswordConfirm"
-placeholder="Confirm your password">
-
-</div>
-
-</div>
-
-
-<div class="auth-actions">
-
-<button
-class="btn btn-primary"
-onclick="createStudentAccount()">
-
-Create Student Account
-
-</button>
-
-
-<button
-class="btn btn-light"
-onclick="loginStudent()">
-
-Login
-
-</button>
-
-</div>
-
-</div>
-
-
-<div
-id="loggedInBox"
-class="logged-in-box"
-style="display:none;">
-
-<strong>
-You are logged in as a Student.
-</strong>
-
-<div
-id="loggedInEmail"
-style="margin-top:6px;">
-</div>
-
-<div
-id="loggedInUid"
-class="uid-box">
-</div>
-
-<div style="margin-top:15px;">
-
-<button
-class="btn btn-danger"
-onclick="logoutStudent()">
-
-Logout
-
-</button>
-
-</div>
-
-</div>
-
-</section>
-
-
-<!-- STUDENT DASHBOARD -->
-
-<div id="studentDashboard">
-
-
-<!-- PROFILE -->
-
-<section class="card">
-
-<div class="profile-header">
-
-<div class="profile-icon">
-👨‍🎓
-</div>
-
-<div>
-
-<h2>
-Student Profile
-</h2>
-
-<p>
-Manage your student information.
-</p>
-
-</div>
-
-</div>
-
-
-<div class="profile-grid">
-
-
-<div class="form-group">
-
-<label>
-Full Name
-</label>
-
-<input
-type="text"
-id="studentName"
-placeholder="Enter your full name">
-
-</div>
-
-
-<div class="form-group">
-
-<label>
-Date of Birth
-</label>
-
-<input
-type="date"
-id="studentDob">
-
-</div>
-
-
-<div class="form-group">
-
-<label>
-Email Address
-</label>
-
-<input
-type="email"
-id="studentEmail"
-placeholder="Enter your email">
-
-</div>
-
-
-<div class="form-group">
-
-<label>
-Phone Number
-</label>
-
-<input
-type="tel"
-id="studentPhone"
-placeholder="Enter your phone number">
-
-</div>
-
-
-<div class="form-group">
-
-<label>
-Country
-</label>
-
-<input
-type="text"
-id="studentCountry"
-placeholder="Enter your country">
-
-</div>
-
-
-<div class="form-group">
-
-<label>
-Preferred Language
-</label>
-
-<select id="studentLanguage">
-
-<option>English</option>
-<option>Urdu</option>
-<option>Arabic</option>
-<option>Hindi</option>
-<option>Bengali</option>
-<option>Persian</option>
-<option>Turkish</option>
-<option>Indonesian</option>
-<option>Malay</option>
-<option>French</option>
-<option>Spanish</option>
-<option>German</option>
-<option>Italian</option>
-<option>Portuguese</option>
-<option>Russian</option>
-<option>Chinese</option>
-<option>Japanese</option>
-<option>Korean</option>
-<option>Thai</option>
-<option>Vietnamese</option>
-<option>Tamil</option>
-<option>Telugu</option>
-<option>Malayalam</option>
-<option>Kannada</option>
-<option>Marathi</option>
-<option>Gujarati</option>
-<option>Punjabi</option>
-<option>Dutch</option>
-<option>Greek</option>
-<option>Swahili</option>
-
-</select>
-
-</div>
-
-</div>
-
-
-<div style="margin-top:20px;">
-
-<button
-class="btn btn-primary"
-onclick="saveStudentProfile()">
-
-Save Profile
-
-</button>
-
-</div>
-
-</section>
-
-
-<!-- PROGRAMS -->
-
-<h2 class="section-title">
-Choose Learning Program
-</h2>
-
-
-<section class="program-grid">
-
-
-<div
-class="program-card"
-onclick="selectProgram(this,'Recitation')">
-
-<div class="program-icon">
-📖
-</div>
-
-<h3>
-Recitation
-</h3>
-
-<p>
-Improve Quran recitation and fluency.
-</p>
-
-</div>
-
-
-<div
-class="program-card"
-onclick="selectProgram(this,'Hifz')">
-
-<div class="program-icon">
-🧠
-</div>
-
-<h3>
-Hifz
-</h3>
-
-<p>
-Memorize Quran with a structured program.
-</p>
-
-</div>
-
-
-<div
-class="program-card"
-onclick="selectProgram(this,'Tajweed')">
-
-<div class="program-icon">
-📚
-</div>
-
-<h3>
-Tajweed
-</h3>
-
-<p>
-Learn the correct rules of Quran recitation.
-</p>
-
-</div>
-
-
-<div
-class="program-card"
-onclick="selectProgram(this,'Arabic Language')">
-
-<div class="program-icon">
-🕌
-</div>
-
-<h3>
-Arabic Language
-</h3>
-
-<p>
-Learn Arabic reading, vocabulary and language.
-</p>
-
-</div>
-
-
-<div
-class="program-card"
-onclick="selectProgram(this,'English Language')">
-
-<div class="program-icon">
-🇬🇧
-</div>
-
-<h3>
-English Language
-</h3>
-
-<p>
-Improve English speaking, reading and writing.
-</p>
-
-</div>
-
-
-</section>
-
-
-<!-- OVERVIEW -->
-
-<h2 class="section-title">
-Learning Overview
-</h2>
-
-
-<section class="dashboard-grid">
-
-
-<div class="dashboard-card">
-
-<div class="icon">
-📚
-</div>
-
-<h3>
-Current Program
-</h3>
-
-<p id="currentProgram">
-No program selected.
-</p>
-
-</div>
-
-
-<div class="dashboard-card">
-
-<div class="icon">
-🧑‍🏫
-</div>
-
-<h3>
-Assigned Teacher
-</h3>
-
-<p id="assignedTeacher">
-Teacher will appear after assignment.
-</p>
-
-</div>
-
-
-<div class="dashboard-card">
-
-<div class="icon">
-📅
-</div>
-
-<h3>
-Next Class
-</h3>
-
-<p id="nextClass">
-No class scheduled yet.
-</p>
-
-</div>
-
-</section>
-
-
-<!-- LIVE CLASSES -->
-
-<h2 class="section-title">
-My Live Class Schedule
-</h2>
-
-
-<section class="card">
-
-<div class="notice">
-
-<strong>
-Live Class:
-</strong>
-
-Choose your available class and press Join when the class is active.
-
-</div>
-
-
-<div class="table-wrapper">
-
-<table>
-
-<thead>
-
-<tr>
-
-<th>Day</th>
-<th>Teacher</th>
-<th>Program</th>
-<th>Start</th>
-<th>End</th>
-<th>Status</th>
-<th>Action</th>
-
-</tr>
-
-</thead>
-
-
-<tbody id="scheduleBody">
-
-
-<tr>
-
-<td>
-Monday
-</td>
-
-<td>
-Quran Teacher
-</td>
-
-<td>
-Recitation
-</td>
-
-<td>
-5:00 PM
-</td>
-
-<td>
-6:00 PM
-</td>
-
-<td>
-
-<span class="status available">
-Available
-</span>
-
-</td>
-
-<td>
-
-<button
-class="btn btn-light"
-onclick="joinClass('Monday','Recitation')">
-
-Join
-
-</button>
-
-</td>
-
-</tr>
-
-
-<tr>
-
-<td>
-Tuesday
-</td>
-
-<td>
-Quran Teacher
-</td>
-
-<td>
-Hifz
-</td>
-
-<td>
-7:00 PM
-</td>
-
-<td>
-8:00 PM
-</td>
-
-<td>
-
-<span class="status booked">
-Booked
-</span>
-
-</td>
-
-<td>
-
-<button
-class="btn btn-primary"
-onclick="joinClass('Tuesday','Hifz')">
-
-Join
-
-</button>
-
-</td>
-
-</tr>
-
-
-<tr>
-
-<td>
-Wednesday
-</td>
-
-<td>
-Quran Teacher
-</td>
-
-<td>
-Tajweed
-</td>
-
-<td>
-6:00 PM
-</td>
-
-<td>
-7:00 PM
-</td>
-
-<td>
-
-<span class="status available">
-Available
-</span>
-
-</td>
-
-<td>
-
-<button
-class="btn btn-light"
-onclick="joinClass('Wednesday','Tajweed')">
-
-Join
-
-</button>
-
-</td>
-
-</tr>
-
-
-</tbody>
-
-</table>
-
-</div>
-
-</section>
-
-
-<!-- HOMEWORK -->
-
-<h2 class="section-title">
-Homework & Assignments
-</h2>
-
-
-<section class="card">
-
-
-<div class="homework-item">
-
-<div class="homework-info">
-
-<h3>
-Recitation Practice
-</h3>
-
-<p>
-Practice your assigned Quran recitation lesson.
-</p>
-
-</div>
-
-<button
-class="btn btn-light"
-onclick="markHomework(this)">
-
-Mark Complete
-
-</button>
-
-</div>
-
-
-<div class="homework-item">
-
-<div class="homework-info">
-
-<h3>
-Hifz Revision
-</h3>
-
-<p>
-Revise your assigned memorization portion.
-</p>
-
-</div>
-
-<button
-class="btn btn-light"
-onclick="markHomework(this)">
-
-Mark Complete
-
-</button>
-
-</div>
-
-
-<div class="homework-item">
-
-<div class="homework-info">
-
-<h3>
-Tajweed Practice
-</h3>
-
-<p>
-Practice the Tajweed rules taught by your teacher.
-</p>
-
-</div>
-
-<button
-class="btn btn-light"
-onclick="markHomework(this)">
-
-Mark Complete
-
-</button>
-
-</div>
-
-
-<div class="homework-item">
-
-<div class="homework-info">
-
-<h3>
-Arabic Language
-</h3>
-
-<p>
-Complete your assigned Arabic language lesson.
-</p>
-
-</div>
-
-<button
-class="btn btn-light"
-onclick="markHomework(this)">
-
-Mark Complete
-
-</button>
-
-</div>
-
-
-<div class="homework-item">
-
-<div class="homework-info">
-
-<h3>
-English Language
-</h3>
-
-<p>
-Complete your assigned English language lesson.
-</p>
-
-</div>
-
-<button
-class="btn btn-light"
-onclick="markHomework(this)">
-
-Mark Complete
-
-</button>
-
-</div>
-
-
-</section>
-
-
-<!-- CHAT -->
-
-<h2 class="section-title">
-Teacher Communication
-</h2>
-
-
-<section class="card">
-
-<div
-class="chat-area"
-id="chatArea">
-
-<div class="chat-message teacher">
-
-<div class="message">
-
-Hello! Welcome to your Learn Hub class.
-
-<small>
-Teacher
-</small>
-
-</div>
-
-</div>
-
-
-<div class="chat-message student">
-
-<div class="message">
-
-Thank you.
-
-<small>
-Student
-</small>
-
-</div>
-
-</div>
-
-</div>
-
-
-<div class="chat-input">
-
-<input
-type="text"
-id="chatInput"
-placeholder="Type your message">
-
-<button
-class="btn btn-primary"
-onclick="sendMessage()">
-
-Send
-
-</button>
-
-</div>
-
-</section>
-
-
-<!-- PAYMENT -->
-
-<h2 class="section-title">
-Student Fees
-</h2>
-
-
-<section class="card">
-
-<div class="payment-grid">
-
-
-<div class="payment-box">
-
-<span>
-Admission Fee
-</span>
-
-<strong>
-No Admission Fee
-</strong>
-
-</div>
-
-
-<div class="payment-box">
-
-<span>
-Learning Fee
-</span>
-
-<strong>
-According to Program
-</strong>
-
-</div>
-
-
-<div class="payment-box">
-
-<span>
-Payment Status
-</span>
-
-<strong id="paymentStatus">
-Not Paid
-</strong>
-
-</div>
-
-
-</div>
-
-
-<div style="margin-top:20px;">
-
-<button
-class="btn btn-gold"
-onclick="paymentMessage()">
-
-View Payment Options
-
-</button>
-
-</div>
-
-</section>
-
-
-</div>
-
-</main>
-
-
-<footer>
-
-<strong>
-Learn Hub Quran
-</strong>
-
-<p>
-Online learning platform for Quran and language education.
-</p>
-
-<p>
-Contact: Sjan70985@gmail.com | 03255411647
-</p>
-
-<p>
-© 2026 Learn Hub Quran. All rights reserved.
-</p>
-
-</footer>
-
-
-<!-- FIREBASE -->
-
-<script type="module">
-
-import {
-    initializeApp
-} from "https://www.gstatic.com/firebasejs/12.19.0/firebase-app.js";
-
-import {
-    getAuth,
-    createUserWithEmailAndPassword,
-    signInWithEmailAndPassword,
-    signOut,
-    onAuthStateChanged
-} from "https://www.gstatic.com/firebasejs/12.19.0/firebase-auth.js";
-
-import {
-    getFirestore,
-    doc,
-    setDoc,
-    getDoc,
-    serverTimestamp
-} from "https://www.gstatic.com/firebasejs/12.19.0/firebase-firestore.js";
-
-
-const firebaseConfig = {
-
-    apiKey: "AIzaSyAdWXljc4GS9kWcNUo-QTWIEF1Lzeo-owg",
-
-    authDomain: "learn-hub-quran.firebaseapp.com",
-
-    projectId: "learn-hub-quran",
-
-    storageBucket: "learn-hub-quran.firebasestorage.app",
-
-    messagingSenderId: "795140160592",
-
-    appId: "1:795140160592:web:f761eaa4043ad0e73f2555",
-
-    measurementId: "G-6G90VGC6CC"
-
-};
-
-
-const app = initializeApp(firebaseConfig);
-
-const auth = getAuth(app);
-
-const db = getFirestore(app);
-
-
-/* FIREBASE CONNECTION */
-
-window.learnHubFirebaseApp = app;
-
-window.learnHubFirebaseAuth = auth;
-
-window.learnHubFirebaseDB = db;
-
-
-/* AUTH MESSAGE */
-
-function showStatus(message){
-
-    const box =
-        document.getElementById("authStatus");
-
-    box.textContent = message;
-
-    box.classList.add("show");
-
-}
-
-
-function hideStatus(){
-
-    document
-        .getElementById("authStatus")
-        .classList.remove("show");
-
-}
-
-
-function showError(message){
-
-    const box =
-        document.getElementById("authError");
-
-    box.textContent = message;
-
-    box.classList.add("show");
-
-}
-
-
-function hideError(){
-
-    document
-        .getElementById("authError")
-        .classList.remove("show");
-
-}
-
-
-/* CREATE STUDENT ACCOUNT */
-
-window.createStudentAccount = async function(){
-
-    hideError();
-
-    hideStatus();
-
-
-    const name =
-        document
-        .getElementById("accountName")
-        .value.trim();
-
-
-    const email =
-        document
-        .getElementById("accountEmail")
-        .value.trim();
-
-
-    const password =
-        document
-        .getElementById("accountPassword")
-        .value;
-
-
-    const confirmPassword =
-        document
-        .getElementById("accountPasswordConfirm")
-        .value;
-
-
-    if(name === ""){
-
-        showError(
-            "Please enter your full name."
-        );
-
-        return;
-
-    }
-
-
-    if(email === ""){
-
-        showError(
-            "Please enter your email address."
-        );
-
-        return;
-
-    }
-
-
-    if(password.length < 6){
-
-        showError(
-            "Password must contain at least 6 characters."
-        );
-
-        return;
-
-    }
-
-
-    if(password !== confirmPassword){
-
-        showError(
-            "Passwords do not match."
-        );
-
-        return;
-
-    }
-
-
-    try{
-
-        showStatus(
-            "Creating your Student account..."
-        );
-
-
-        const userCredential =
-            await createUserWithEmailAndPassword(
-                auth,
-                email,
-                password
-            );
-
-
-        const user =
-            userCredential.user;
-
-
-        /*
-        Save the basic Student record
-        using Firebase UID as document ID.
-        */
-
-        try{
-
-            await setDoc(
-                doc(
-                    db,
-                    "users",
-                    user.uid
-                ),
-                {
-                    uid:user.uid,
-                    name:name,
-                    email:user.email,
-                    role:"student",
-                    accountType:"Student",
-                    createdAt:serverTimestamp()
-                },
-                {
-                    merge:true
-                }
-            );
-
-
-            await setDoc(
-                doc(
-                    db,
-                    "students",
-                    user.uid
-                ),
-                {
-                    uid:user.uid,
-                    name:name,
-                    email:user.email,
-                    role:"student",
-                    accountType:"Student",
-                    admissionFee:"No Admission Fee",
-                    createdAt:serverTimestamp()
-                },
-                {
-                    merge:true
-                }
-            );
-
-        }catch(firestoreError){
-
-            console.error(
-                "Firestore profile error:",
-                firestoreError
-            );
-
-        }
-
-
-        document
-            .getElementById("accountName")
-            .value = name;
-
-
-        document
-            .getElementById("studentName")
-            .value = name;
-
-
-        document
-            .getElementById("studentEmail")
-            .value = user.email;
-
-
-        showStatus(
-            "Student account created successfully."
-        );
-
-
-    }catch(error){
-
-        console.error(error);
-
-        hideStatus();
-
-        showError(
-            getFirebaseErrorMessage(error)
-        );
-
-    }
-
-};
-
-
-/* LOGIN */
-
-window.loginStudent = async function(){
-
-    hideError();
-
-    hideStatus();
-
-
-    const email =
-        document
-        .getElementById("accountEmail")
-        .value.trim();
-
-
-    const password =
-        document
-        .getElementById("accountPassword")
-        .value;
-
-
-    if(email === ""){
-
-        showError(
-            "Please enter your email address."
-        );
-
-        return;
-
-    }
-
-
-    if(password === ""){
-
-        showError(
-            "Please enter your password."
-        );
-
-        return;
-
-    }
-
-
-    try{
-
-        showStatus(
-            "Signing you in..."
-        );
-
-
-        await signInWithEmailAndPassword(
-            auth,
-            email,
-            password
-        );
-
-
-        showStatus(
-            "Login successful."
-        );
-
-
-    }catch(error){
-
-        console.error(error);
-
-        hideStatus();
-
-        showError(
-            getFirebaseErrorMessage(error)
-        );
-
-    }
-
-};
-
-
-/* LOGOUT */
-
-window.logoutStudent = async function(){
-
-    try{
-
-        await signOut(auth);
-
-        showStatus(
-            "You have been logged out."
-        );
-
-    }catch(error){
-
-        showError(
-            getFirebaseErrorMessage(error)
-        );
-
-    }
-
-};
-
-
-/* AUTH STATE */
-
-onAuthStateChanged(
-    auth,
-    async function(user){
-
-        if(user){
-
-            document
-                .getElementById("authForm")
-                .style.display="none";
-
-
-            document
-                .getElementById("loggedInBox")
-                .style.display="block";
-
-
-            document
-                .getElementById("loggedInEmail")
-                .textContent =
-                "Email: " + user.email;
-
-
-            document
-                .getElementById("loggedInUid")
-                .textContent =
-                "Student ID: " + user.uid;
-
-
-            document
-                .getElementById("studentDashboard")
-                .style.display="block";
-
-
-            document
-                .getElementById("studentEmail")
-                .value =
-                user.email || "";
-
-
-            await loadFirebaseStudentProfile(
-                user
-            );
-
-
-            loadLocalData();
-
-
-        }else{
-
-            document
-                .getElementById("authForm")
-                .style.display="block";
-
-
-            document
-                .getElementById("loggedInBox")
-                .style.display="none";
-
-
-            document
-                .getElementById("studentDashboard")
-                .style.display="none";
-
-        }
-
-    }
-);
-
-
-/* LOAD FIRESTORE PROFILE */
-
-async function loadFirebaseStudentProfile(user){
-
-    try{
-
-        const snapshot =
-            await getDoc(
-                doc(
-                    db,
-                    "students",
-                    user.uid
-                )
-            );
-
-
-        if(snapshot.exists()){
-
-            const data =
-                snapshot.data();
-
-
-            document
-                .getElementById("studentName")
-                .value =
-                data.name || "";
-
-
-            document
-                .getElementById("studentEmail")
-                .value =
-                data.email || user.email || "";
-
-
-            document
-                .getElementById("studentDob")
-                .value =
-                data.dob || "";
-
-
-            document
-                .getElementById("studentPhone")
-                .value =
-                data.phone || "";
-
-
-            document
-                .getElementById("studentCountry")
-                .value =
-                data.country || "";
-
-
-            if(data.language){
-
-                document
-                    .getElementById("studentLanguage")
-                    .value =
-                    data.language;
-
-
-                document
-                    .getElementById("studentLanguageTop")
-                    .value =
-                    data.language;
-
-            }
-
-
-            if(data.selectedProgram){
-
-                document
-                    .getElementById("currentProgram")
-                    .textContent =
-                    data.selectedProgram;
-
-            }
-
-        }
-
-    }catch(error){
-
-        console.error(
-            "Could not load Firestore profile:",
-            error
-        );
-
-    }
-
-}
-
-
-/* SAVE STUDENT PROFILE */
-
-window.saveStudentProfile = async function(){
-
-    const user =
-        auth.currentUser;
-
-
-    if(!user){
-
-        alert(
-            "Please login first."
-        );
-
-        return;
-
-    }
-
-
-    const profile = {
-
-        uid:user.uid,
-
-        role:"student",
-
-        accountType:"Student",
-
-        name:
-            document
-            .getElementById("studentName")
-            .value.trim(),
-
-        dob:
-            document
-            .getElementById("studentDob")
-            .value,
-
-        email:
-            document
-            .getElementById("studentEmail")
-            .value.trim(),
-
-        phone:
-            document
-            .getElementById("studentPhone")
-            .value.trim(),
-
-        country:
-            document
-            .getElementById("studentCountry")
-            .value.trim(),
-
-        language:
-            document
-            .getElementById("studentLanguage")
-            .value,
-
-        selectedProgram:
-            localStorage.getItem(
-                "selectedProgram"
-            ) || "",
-
-        updatedAt:
-            serverTimestamp()
+      appId: "YOUR_APP_ID"
 
     };
 
 
-    try{
+    // ==========================================
+    // INITIALIZE FIREBASE
+    // ==========================================
 
-        await setDoc(
-            doc(
-                db,
-                "students",
-                user.uid
-            ),
-            profile,
-            {
-                merge:true
-            }
-        );
+    const app = initializeApp(firebaseConfig);
+
+    const auth = getAuth(app);
+
+    const db = getFirestore(app);
 
 
-        await setDoc(
-            doc(
-                db,
-                "users",
-                user.uid
-            ),
-            {
-                uid:user.uid,
-                name:profile.name,
-                email:profile.email,
-                role:"student",
-                accountType:"Student",
-                updatedAt:serverTimestamp()
-            },
-            {
-                merge:true
-            }
-        );
+    // ==========================================
+    // ELEMENTS
+    // ==========================================
+
+    const form = document.getElementById("studentForm");
+
+    const saveBtn = document.getElementById("saveBtn");
+
+    const logoutBtn = document.getElementById("logoutBtn");
+
+    const message = document.getElementById("message");
 
 
-        localStorage.setItem(
-            "studentProfile",
-            JSON.stringify(profile)
-        );
+    // ==========================================
+    // SHOW MESSAGE
+    // ==========================================
 
+    function showMessage(text, type) {
 
-        alert(
-            "Student profile saved successfully."
-        );
+      message.textContent = text;
 
-
-    }catch(error){
-
-        console.error(error);
-
-        alert(
-            "Profile could not be saved to Firestore yet. Firebase Rules will be configured in the next step."
-        );
-
-    }
-
-};
-
-
-/* LANGUAGE */
-
-window.changeLanguage = function(language){
-
-    localStorage.setItem(
-        "studentLanguage",
-        language
-    );
-
-
-    const languageBox =
-        document.getElementById(
-            "studentLanguage"
-        );
-
-
-    if(languageBox){
-
-        languageBox.value =
-            language;
+      message.className = type;
 
     }
 
 
-    alert(
-        "Language selected: " + language
-    );
+    // ==========================================
+    // AUTH CHECK
+    // ==========================================
 
-};
+    let currentUser = null;
 
+    onAuthStateChanged(auth, async (user) => {
 
-/* SELECT PROGRAM */
+      if (!user) {
 
-window.selectProgram = async function(
-    card,
-    program
-){
+        showMessage(
+          "Please sign in first.",
+          "error"
+        );
 
-    const user =
-        auth.currentUser;
+        saveBtn.disabled = true;
 
+        return;
+      }
 
-    document
-        .querySelectorAll(".program-card")
-        .forEach(function(item){
+      currentUser = user;
 
-            item.classList.remove("active");
+      saveBtn.disabled = false;
 
-        });
+      // Automatically use Firebase email
+      if (user.email) {
 
+        document.getElementById("email").value =
+          user.email;
 
-    card.classList.add("active");
-
-
-    document
-        .getElementById("currentProgram")
-        .textContent =
-        program;
+      }
 
 
-    localStorage.setItem(
-        "selectedProgram",
-        program
-    );
+      // Load existing profile
+      await loadStudentProfile(user.uid);
+
+    });
 
 
-    if(user){
+    // ==========================================
+    // LOAD PROFILE
+    // ==========================================
 
-        try{
+    async function loadStudentProfile(uid) {
 
-            await setDoc(
-                doc(
-                    db,
-                    "students",
-                    user.uid
-                ),
-                {
-                    selectedProgram:program,
-                    updatedAt:serverTimestamp()
-                },
-                {
-                    merge:true
-                }
-            );
+      try {
 
-        }catch(error){
+        const studentRef =
+          doc(db, "students", uid);
 
-            console.error(
-                "Program save error:",
-                error
-            );
+        const studentSnap =
+          await getDoc(studentRef);
+
+
+        if (studentSnap.exists()) {
+
+          const data =
+            studentSnap.data();
+
+
+          document.getElementById("fullName").value =
+            data.fullName || "";
+
+          document.getElementById("dob").value =
+            data.dob || "";
+
+          document.getElementById("email").value =
+            data.email || "";
+
+          document.getElementById("phone").value =
+            data.phone || "";
+
+          document.getElementById("country").value =
+            data.country || "Pakistan";
+
+          document.getElementById("language").value =
+            data.language || "";
 
         }
 
-    }
+      } catch (error) {
 
-};
+        console.error(error);
 
-
-/* JOIN CLASS */
-
-window.joinClass = function(
-    day,
-    program
-){
-
-    localStorage.setItem(
-        "selectedClassDay",
-        day
-    );
-
-
-    localStorage.setItem(
-        "selectedClassProgram",
-        program
-    );
-
-
-    alert(
-        "Live classroom will open here when the live class system is connected."
-    );
-
-};
-
-
-/* HOMEWORK */
-
-window.markHomework = function(button){
-
-    button.textContent =
-        "Completed";
-
-
-    button.classList.remove(
-        "btn-light"
-    );
-
-
-    button.classList.add(
-        "btn-primary"
-    );
-
-
-    button.disabled = true;
-
-
-    localStorage.setItem(
-        "homeworkCompleted",
-        "true"
-    );
-
-};
-
-
-/* SEND MESSAGE */
-
-window.sendMessage = function(){
-
-    const input =
-        document.getElementById(
-            "chatInput"
+        showMessage(
+          "Could not load student profile.",
+          "error"
         );
 
+      }
 
-    const text =
-        input.value.trim();
+    }
 
 
-    if(text===""){
+    // ==========================================
+    // SAVE PROFILE
+    // ==========================================
 
-        alert(
-            "Please type a message first."
+    form.addEventListener("submit", async (event) => {
+
+      event.preventDefault();
+
+
+      if (!currentUser) {
+
+        showMessage(
+          "Please sign in first.",
+          "error"
         );
 
         return;
 
-    }
+      }
 
 
-    const chat =
-        document.getElementById(
-            "chatArea"
+      saveBtn.disabled = true;
+
+      saveBtn.textContent = "Saving...";
+
+
+      try {
+
+        const profile = {
+
+          uid: currentUser.uid,
+
+          fullName:
+            document.getElementById("fullName").value.trim(),
+
+          dob:
+            document.getElementById("dob").value,
+
+          email:
+            document.getElementById("email").value.trim(),
+
+          phone:
+            document.getElementById("phone").value.trim(),
+
+          country:
+            document.getElementById("country").value.trim(),
+
+          language:
+            document.getElementById("language").value,
+
+          updatedAt:
+            serverTimestamp()
+
+        };
+
+
+        const studentRef =
+          doc(db, "students", currentUser.uid);
+
+
+        await setDoc(
+          studentRef,
+          profile,
+          { merge: true }
         );
 
 
-    const wrapper =
-        document.createElement(
-            "div"
+        showMessage(
+          "Student Profile saved successfully!",
+          "success"
         );
 
 
-    wrapper.className =
-        "chat-message student";
+      } catch (error) {
 
-
-    wrapper.innerHTML = `
-
-        <div class="message">
-
-            ${escapeHTML(text)}
-
-            <small>
-                Student
-            </small>
-
-        </div>
-
-    `;
-
-
-    chat.appendChild(
-        wrapper
-    );
-
-
-    input.value = "";
-
-
-    chat.scrollTop =
-        chat.scrollHeight;
-
-};
-
-
-/* SAFE TEXT */
-
-function escapeHTML(text){
-
-    const div =
-        document.createElement(
-            "div"
+        console.error(
+          "Firestore Error:",
+          error
         );
 
 
-    div.textContent =
-        text;
-
-
-    return div.innerHTML;
-
-}
-
-
-/* PAYMENT */
-
-window.paymentMessage = function(){
-
-    alert(
-        "Payment system will be connected here. Your payment status will appear in your Student Dashboard."
-    );
-
-};
-
-
-/* FIREBASE ERROR MESSAGE */
-
-function getFirebaseErrorMessage(error){
-
-    const code =
-        error.code || "";
-
-
-    if(
-        code ===
-        "auth/email-already-in-use"
-    ){
-
-        return "This email is already registered. Please use Login.";
-
-    }
-
-
-    if(
-        code ===
-        "auth/invalid-email"
-    ){
-
-        return "Please enter a valid email address.";
-
-    }
-
-
-    if(
-        code ===
-        "auth/weak-password"
-    ){
-
-        return "Password is too weak. Please use at least 6 characters.";
-
-    }
-
-
-    if(
-        code ===
-        "auth/invalid-credential"
-    ){
-
-        return "Email or password is incorrect.";
-
-    }
-
-
-    if(
-        code ===
-        "auth/user-not-found"
-    ){
-
-        return "No account was found with this email.";
-
-    }
-
-
-    if(
-        code ===
-        "auth/wrong-password"
-    ){
-
-        return "The password is incorrect.";
-
-    }
-
-
-    return (
-        "Firebase error: " +
-        (error.message || "Please try again.")
-    );
-
-}
-
-
-/* LOCAL DATA */
-
-function loadLocalData(){
-
-    const savedProfile =
-        localStorage.getItem(
-            "studentProfile"
+        showMessage(
+          "Profile could not be saved to Firestore. Please check Firebase settings and Firestore Rules.",
+          "error"
         );
 
-
-    if(savedProfile){
-
-        try{
-
-            const profile =
-                JSON.parse(
-                    savedProfile
-                );
+      }
 
 
-            if(profile.name){
+      saveBtn.disabled = false;
 
-                document
-                    .getElementById("studentName")
-                    .value =
-                    profile.name;
+      saveBtn.textContent = "Save Profile";
 
-            }
+    });
 
 
-            if(profile.dob){
+    // ==========================================
+    // SIGN OUT
+    // ==========================================
 
-                document
-                    .getElementById("studentDob")
-                    .value =
-                    profile.dob;
+    logoutBtn.addEventListener("click", async () => {
 
-            }
+      try {
 
+        await signOut(auth);
 
-            if(profile.email){
+        window.location.href = "index.html";
 
-                document
-                    .getElementById("studentEmail")
-                    .value =
-                    profile.email;
+      } catch (error) {
 
-            }
+        console.error(error);
 
-
-            if(profile.phone){
-
-                document
-                    .getElementById("studentPhone")
-                    .value =
-                    profile.phone;
-
-            }
-
-
-            if(profile.country){
-
-                document
-                    .getElementById("studentCountry")
-                    .value =
-                    profile.country;
-
-            }
-
-
-            if(profile.language){
-
-                document
-                    .getElementById("studentLanguage")
-                    .value =
-                    profile.language;
-
-
-                document
-                    .getElementById("studentLanguageTop")
-                    .value =
-                    profile.language;
-
-            }
-
-        }catch(error){
-
-            console.log(
-                "Profile loading error",
-                error
-            );
-
-        }
-
-    }
-
-
-    const savedLanguage =
-        localStorage.getItem(
-            "studentLanguage"
+        showMessage(
+          "Could not sign out.",
+          "error"
         );
 
+      }
 
-    if(savedLanguage){
+    });
 
-        document
-            .getElementById(
-                "studentLanguageTop"
-            )
-            .value =
-            savedLanguage;
-
-
-        document
-            .getElementById(
-                "studentLanguage"
-            )
-            .value =
-            savedLanguage;
-
-    }
-
-
-    const savedProgram =
-        localStorage.getItem(
-            "selectedProgram"
-        );
-
-
-    if(savedProgram){
-
-        document
-            .getElementById(
-                "currentProgram"
-            )
-            .textContent =
-            savedProgram;
-
-
-        document
-            .querySelectorAll(
-                ".program-card"
-            )
-            .forEach(
-                function(card){
-
-                    const title =
-                        card
-                        .querySelector("h3")
-                        .textContent;
-
-
-                    if(
-                        title ===
-                        savedProgram
-                    ){
-
-                        card.classList.add(
-                            "active"
-                        );
-
-                    }
-
-                }
-            );
-
-    }
-
-
-    const homeworkCompleted =
-        localStorage.getItem(
-            "homeworkCompleted"
-        );
-
-
-    if(
-        homeworkCompleted ===
-        "true"
-    ){
-
-        document
-            .querySelectorAll(
-                ".homework-item .btn"
-            )
-            .forEach(
-                function(button){
-
-                    button.textContent =
-                        "Completed";
-
-
-                    button.classList.remove(
-                        "btn-light"
-                    );
-
-
-                    button.classList.add(
-                        "btn-primary"
-                    );
-
-
-                    button.disabled =
-                        true;
-
-                }
-            );
-
-    }
-
-}
-
-</script>
+  </script>
 
 </body>
 </html>
