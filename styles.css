@@ -1,0 +1,297 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #f4f7fb;
+  color: #1f2937;
+}
+
+
+/* =========================
+   HEADER
+========================= */
+
+header {
+  background: #2563eb;
+  color: white;
+  padding: 22px;
+  text-align: center;
+}
+
+header h1 {
+  margin: 0;
+  font-size: 28px;
+}
+
+header p {
+  margin: 7px 0 0;
+}
+
+
+/* =========================
+   MAIN CONTAINER
+========================= */
+
+.container {
+  max-width: 720px;
+  margin: 25px auto;
+  padding: 0 16px;
+}
+
+
+/* =========================
+   CARD
+========================= */
+
+.card {
+  background: white;
+  padding: 22px;
+  border-radius: 16px;
+  margin-bottom: 18px;
+
+  box-shadow:
+    0 4px 18px rgba(0, 0, 0, 0.08);
+}
+
+.card h2 {
+  margin-top: 0;
+}
+
+
+/* =========================
+   FORM LABEL
+========================= */
+
+label {
+  display: block;
+  font-weight: bold;
+  margin: 14px 0;
+}
+
+
+/* =========================
+   INPUTS
+========================= */
+
+input,
+select {
+  display: block;
+
+  width: 100%;
+
+  padding: 12px;
+
+  margin-top: 7px;
+
+  border:
+    1px solid #cbd5e1;
+
+  border-radius: 9px;
+
+  font-size: 16px;
+
+  background: white;
+}
+
+
+/* =========================
+   INPUT FOCUS
+========================= */
+
+input:focus,
+select:focus {
+
+  outline: none;
+
+  border-color:
+    #2563eb;
+
+  box-shadow:
+    0 0 0 2px
+    rgba(37, 99, 235, 0.1);
+}
+
+
+/* =========================
+   BUTTON
+========================= */
+
+button,
+.button {
+
+  display: inline-block;
+
+  background:
+    #2563eb;
+
+  color: white;
+
+  border: none;
+
+  border-radius: 9px;
+
+  padding:
+    12px 18px;
+
+  font-size: 16px;
+
+  font-weight: bold;
+
+  cursor: pointer;
+
+  text-decoration: none;
+
+  margin-top: 8px;
+}
+
+
+/* =========================
+   BUTTON HOVER
+========================= */
+
+button:hover,
+.button:hover {
+
+  opacity: 0.9;
+
+}
+
+
+/* =========================
+   DISABLED BUTTON
+========================= */
+
+button:disabled {
+
+  opacity: 0.6;
+
+  cursor:
+    not-allowed;
+}
+
+
+/* =========================
+   SECONDARY BUTTON
+========================= */
+
+.secondary {
+
+  background:
+    white;
+
+  color:
+    #1f2937;
+
+  border:
+    1px solid #cbd5e1;
+
+  width: 100%;
+
+  margin-bottom: 25px;
+}
+
+
+/* =========================
+   CLASS BOX
+========================= */
+
+.class {
+
+  padding:
+    15px 0;
+
+  border-bottom:
+    1px solid #e5e7eb;
+}
+
+
+.class:last-child {
+
+  border-bottom:
+    none;
+}
+
+
+.class h3 {
+
+  margin:
+    0 0 8px;
+}
+
+
+/* =========================
+   MESSAGE
+========================= */
+
+#message {
+
+  margin-top:
+    15px;
+
+  font-weight:
+    bold;
+}
+
+
+/* =========================
+   LIVE CLASS FRAME
+========================= */
+
+iframe {
+
+  width: 100%;
+
+  min-height:
+    480px;
+
+  border: none;
+
+  border-radius:
+    10px;
+
+  margin-top:
+    18px;
+}
+
+
+/* =========================
+   MOBILE
+========================= */
+
+@media (max-width: 600px) {
+
+  header h1 {
+
+    font-size:
+      24px;
+
+  }
+
+
+  .container {
+
+    margin-top:
+      15px;
+
+  }
+
+
+  .card {
+
+    padding:
+      18px;
+
+  }
+
+
+  iframe {
+
+    min-height:
+      350px;
+
+  }
+
+}
