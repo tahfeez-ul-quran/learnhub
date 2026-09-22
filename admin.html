@@ -10,7 +10,7 @@
     content="width=device-width, initial-scale=1.0"
   >
 
-  <title>Learn Hub</title>
+  <title>Learn Hub - Admin</title>
 
   <link
     rel="stylesheet"
@@ -27,7 +27,7 @@
 
   <h1>Learn Hub</h1>
 
-  <p>Learn • Teach • Grow</p>
+  <p>Admin Dashboard</p>
 
 </header>
 
@@ -35,171 +35,41 @@
 <main class="container">
 
 
-  <!-- Welcome -->
-
   <section class="card">
 
-    <h2>Welcome to Learn Hub</h2>
+    <h2>Admin Panel</h2>
+
+    <p id="status">
+      Checking account...
+    </p>
 
     <p>
-      An online learning platform for
-      students and teachers.
+      Admin permissions are controlled
+      by Firebase Security Rules.
     </p>
 
   </section>
 
 
-  <!-- Login -->
-
   <section class="card">
 
-    <h2>Sign In</h2>
+    <h2>Manage Classes</h2>
 
-
-    <form id="loginForm">
-
-
-      <label>
-
-        Email
-
-        <input
-          type="email"
-          id="loginEmail"
-          placeholder="Enter your email"
-          required
-        >
-
-      </label>
-
-
-      <label>
-
-        Password
-
-        <input
-          type="password"
-          id="loginPassword"
-          placeholder="Enter your password"
-          required
-        >
-
-      </label>
-
-
-      <button
-        type="submit"
-        id="loginBtn"
-      >
-
-        Sign In
-
-      </button>
-
-
-    </form>
-
-
-    <p id="loginMessage"></p>
+    <div id="classList">
+      Loading...
+    </div>
 
   </section>
 
 
-  <!-- Register -->
+  <button
+    id="logoutBtn"
+    class="secondary"
+  >
 
-  <section class="card">
+    Sign Out
 
-    <h2>Create Account</h2>
-
-
-    <form id="registerForm">
-
-
-      <label>
-
-        Full Name
-
-        <input
-          type="text"
-          id="registerName"
-          placeholder="Enter your full name"
-          required
-        >
-
-      </label>
-
-
-      <label>
-
-        Email
-
-        <input
-          type="email"
-          id="registerEmail"
-          placeholder="Enter your email"
-          required
-        >
-
-      </label>
-
-
-      <label>
-
-        Password
-
-        <input
-          type="password"
-          id="registerPassword"
-          placeholder="Create a password"
-          minlength="6"
-          required
-        >
-
-      </label>
-
-
-      <label>
-
-        Account Type
-
-        <select
-          id="accountType"
-          required
-        >
-
-          <option value="">
-            Select Account Type
-          </option>
-
-          <option value="student">
-            Student
-          </option>
-
-          <option value="teacher">
-            Teacher
-          </option>
-
-        </select>
-
-      </label>
-
-
-      <button
-        type="submit"
-        id="registerBtn"
-      >
-
-        Create Account
-
-      </button>
-
-
-    </form>
-
-
-    <p id="registerMessage"></p>
-
-  </section>
+  </button>
 
 
 </main>
@@ -216,403 +86,352 @@
 
 
   import {
-    signInWithEmailAndPassword,
-    createUserWithEmailAndPassword
+    onAuthStateChanged,
+    signOut
   }
   from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
 
 
   import {
+    collection,
+    getDocs,
+    query,
+    orderBy,
     doc,
-    setDoc
+    updateDoc
   }
   from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
 
-  // ==============================
-  // LOGIN ELEMENTS
-  // ==============================
-
-  const loginForm =
+  const status =
     document.getElementById(
-      "loginForm"
+      "status"
     );
 
 
-  const loginEmail =
+  const classList =
     document.getElementById(
-      "loginEmail"
+      "classList"
     );
 
 
-  const loginPassword =
+  const logoutBtn =
     document.getElementById(
-      "loginPassword"
+      "logoutBtn"
     );
 
 
-  const loginBtn =
-    document.getElementById(
-      "loginBtn"
-    );
-
-
-  const loginMessage =
-    document.getElementById(
-      "loginMessage"
-    );
+  let currentUser = null;
 
 
   // ==============================
-  // REGISTER ELEMENTS
+  // CHECK ADMIN LOGIN
   // ==============================
 
-  const registerForm =
-    document.getElementById(
-      "registerForm"
-    );
+  onAuthStateChanged(
+    auth,
+    async (user) => {
 
+      if (!user) {
 
-  const registerName =
-    document.getElementById(
-      "registerName"
-    );
+        currentUser = null;
 
+        status.textContent =
+          "Please sign in first.";
 
-  const registerEmail =
-    document.getElementById(
-      "registerEmail"
-    );
+        classList.textContent =
+          "Please sign in first.";
 
-
-  const registerPassword =
-    document.getElementById(
-      "registerPassword"
-    );
-
-
-  const accountType =
-    document.getElementById(
-      "accountType"
-    );
-
-
-  const registerBtn =
-    document.getElementById(
-      "registerBtn"
-    );
-
-
-  const registerMessage =
-    document.getElementById(
-      "registerMessage"
-    );
-
-
-  // ==============================
-  // SIGN IN
-  // ==============================
-
-  loginForm.addEventListener(
-    "submit",
-    async (event) => {
-
-      event.preventDefault();
-
-
-      loginBtn.disabled =
-        true;
-
-
-      loginBtn.textContent =
-        "Signing In...";
-
-
-      loginMessage.textContent =
-        "";
-
-
-      try {
-
-        const result =
-          await signInWithEmailAndPassword(
-
-            auth,
-
-            loginEmail.value.trim(),
-
-            loginPassword.value
-
-          );
-
-
-        const user =
-          result.user;
-
-
-        loginMessage.textContent =
-          "Login successful.";
-
-
-        /*
-          For now students and teachers
-          can open their own dashboards
-          manually.
-
-          Later we can connect automatic
-          role-based routing here.
-        */
-
-
-        setTimeout(
-          () => {
-
-            window.location.href =
-              "student.html";
-
-          },
-          700
-        );
-
-
-      }
-
-      catch (error) {
-
-        console.error(
-          error
-        );
-
-
-        loginMessage.textContent =
-          getFirebaseError(
-            error.code
-          );
+        return;
 
       }
 
 
-      loginBtn.disabled =
-        false;
+      currentUser =
+        user;
 
 
-      loginBtn.textContent =
-        "Sign In";
+      status.textContent =
+        "Signed in as: " +
+        (user.email || "User");
+
+
+      await loadClasses();
 
     }
   );
 
 
   // ==============================
-  // CREATE ACCOUNT
+  // LOAD CLASSES
   // ==============================
 
-  registerForm.addEventListener(
-    "submit",
-    async (event) => {
+  async function loadClasses() {
 
-      event.preventDefault();
-
-
-      registerBtn.disabled =
-        true;
+    classList.innerHTML =
+      "Loading classes...";
 
 
-      registerBtn.textContent =
-        "Creating...";
+    try {
 
-
-      registerMessage.textContent =
-        "";
-
-
-      try {
-
-        const result =
-          await createUserWithEmailAndPassword(
-
-            auth,
-
-            registerEmail.value.trim(),
-
-            registerPassword.value
-
-          );
-
-
-        const user =
-          result.user;
-
-
-        // Save account information
-
-        await setDoc(
-
-          doc(
-            db,
-            "users",
-            user.uid
-          ),
-
-          {
-
-            uid:
-              user.uid,
-
-            name:
-              registerName.value.trim(),
-
-            email:
-              registerEmail.value.trim(),
-
-            role:
-              accountType.value,
-
-            createdAt:
-              new Date()
-
-          }
-
+      const classesRef =
+        collection(
+          db,
+          "classes"
         );
 
 
-        // Also create student profile
+      const classesQuery =
+        query(
+          classesRef,
+          orderBy(
+            "startAt",
+            "asc"
+          )
+        );
 
-        if (
-          accountType.value ===
-          "student"
-        ) {
 
-          await setDoc(
+      const snapshot =
+        await getDocs(
+          classesQuery
+        );
 
-            doc(
-              db,
-              "students",
-              user.uid
-            ),
 
-            {
+      classList.innerHTML =
+        "";
 
-              uid:
-                user.uid,
 
-              fullName:
-                registerName.value.trim(),
+      if (snapshot.empty) {
 
-              email:
-                registerEmail.value.trim(),
+        classList.textContent =
+          "No classes found.";
 
-              country:
-                "Pakistan",
+        return;
 
-              createdAt:
-                new Date()
+      }
+
+
+      snapshot.forEach(
+        (classDoc) => {
+
+          const data =
+            classDoc.data();
+
+
+          const box =
+            document.createElement(
+              "div"
+            );
+
+
+          box.className =
+            "class";
+
+
+          const title =
+            document.createElement(
+              "h3"
+            );
+
+
+          title.textContent =
+            data.title ||
+            "Class";
+
+
+          const teacher =
+            document.createElement(
+              "p"
+            );
+
+
+          teacher.textContent =
+            "Teacher: " +
+            (
+              data.teacherName ||
+              "Teacher"
+            );
+
+
+          const time =
+            document.createElement(
+              "p"
+            );
+
+
+          time.textContent =
+            data.startText ||
+            "Scheduled";
+
+
+          const state =
+            document.createElement(
+              "p"
+            );
+
+
+          state.textContent =
+            "Status: " +
+            (
+              data.published === false
+                ? "Hidden"
+                : "Published"
+            );
+
+
+          const button =
+            document.createElement(
+              "button"
+            );
+
+
+          button.textContent =
+            data.published === false
+              ? "Publish"
+              : "Hide";
+
+
+          button.addEventListener(
+            "click",
+            async () => {
+
+              await changeClassStatus(
+                classDoc.id,
+                data.published === false
+              );
 
             }
+          );
 
+
+          box.appendChild(
+            title
+          );
+
+
+          box.appendChild(
+            teacher
+          );
+
+
+          box.appendChild(
+            time
+          );
+
+
+          box.appendChild(
+            state
+          );
+
+
+          box.appendChild(
+            button
+          );
+
+
+          classList.appendChild(
+            box
           );
 
         }
-
-
-        registerMessage.textContent =
-          "Account created successfully.";
-
-
-        setTimeout(
-          () => {
-
-            if (
-              accountType.value ===
-              "teacher"
-            ) {
-
-              window.location.href =
-                "teacher.html";
-
-            }
-
-            else {
-
-              window.location.href =
-                "student.html";
-
-            }
-
-          },
-          800
-        );
-
-      }
-
-      catch (error) {
-
-        console.error(
-          error
-        );
-
-
-        registerMessage.textContent =
-          getFirebaseError(
-            error.code
-          );
-
-      }
-
-
-      registerBtn.disabled =
-        false;
-
-
-      registerBtn.textContent =
-        "Create Account";
+      );
 
     }
-  );
+
+    catch (error) {
+
+      console.error(
+        "Admin classes error:",
+        error
+      );
 
 
-  // ==============================
-  // FIREBASE ERROR MESSAGE
-  // ==============================
-
-  function getFirebaseError(
-    code
-  ) {
-
-    switch (code) {
-
-      case
-        "auth/email-already-in-use":
-
-        return "This email is already registered.";
-
-      case
-        "auth/invalid-email":
-
-        return "Please enter a valid email.";
-
-      case
-        "auth/weak-password":
-
-        return "Password must be at least 6 characters.";
-
-      case
-        "auth/invalid-credential":
-
-        return "Email or password is incorrect.";
-
-      case
-        "auth/user-not-found":
-
-        return "Account not found.";
-
-      default:
-
-        return "Something went wrong. Please try again.";
+      classList.textContent =
+        "Classes could not be loaded. Check Firebase Rules.";
 
     }
 
   }
+
+
+  // ==============================
+  // PUBLISH / HIDE CLASS
+  // ==============================
+
+  async function changeClassStatus(
+    classId,
+    newStatus
+  ) {
+
+    try {
+
+      await updateDoc(
+
+        doc(
+          db,
+          "classes",
+          classId
+        ),
+
+        {
+          published:
+            newStatus
+        }
+
+      );
+
+
+      await loadClasses();
+
+    }
+
+    catch (error) {
+
+      console.error(
+        "Permission error:",
+        error
+      );
+
+
+      alert(
+        "Permission denied. Firebase Admin Rules must allow this account."
+      );
+
+    }
+
+  }
+
+
+  // ==============================
+  // SIGN OUT
+  // ==============================
+
+  logoutBtn.addEventListener(
+    "click",
+    async () => {
+
+      try {
+
+        await signOut(
+          auth
+        );
+
+
+        window.location.href =
+          "index.html";
+
+      }
+
+      catch (error) {
+
+        console.error(
+          error
+        );
+
+      }
+
+    }
+  );
 
 
 </script>
